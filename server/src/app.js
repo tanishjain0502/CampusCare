@@ -6,17 +6,21 @@ const complaintRoutes = require('./routes/complaintRoutes');
 const app = express();
 
 // ---------------------------------------------------------------------------
-// CORS — allow requests only from the configured client origin
+// CORS — allow requests from configured client origin(s)
 // ---------------------------------------------------------------------------
-const allowedOrigins = [
-  process.env.CLIENT_URL || 'http://localhost:5173',
-];
+const rawOrigins = process.env.CLIENT_URL || 'http://localhost:5173';
+const allowedOrigins = rawOrigins
+  .split(',')
+  .map((url) => url.trim().replace(/\/$/, ''))
+  .filter(Boolean);
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (e.g. curl, Postman, mobile apps)
-      if (!origin || allowedOrigins.includes(origin)) {
+      // Allow requests with no origin (e.g. curl, Postman, health monitors)
+      if (!origin) return callback(null, true);
+      const cleanOrigin = origin.replace(/\/$/, '');
+      if (allowedOrigins.includes(cleanOrigin) || allowedOrigins.includes('*')) {
         callback(null, true);
       } else {
         callback(new Error(`CORS policy: origin ${origin} is not allowed.`));
