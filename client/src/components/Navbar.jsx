@@ -14,7 +14,7 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
       <div className="container">
         <Link className="navbar-brand fw-bold fs-4" to="/">
-          🎓 CampusCare
+          CampusCare
         </Link>
 
         <button
