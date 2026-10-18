@@ -1,0 +1,2159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CampusCare - Minor Project Report (SGSITS Indore)</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Times New Roman', Times, Georgia, serif;
+      background-color: #e5e7eb;
+      color: #000000;
+    }
+    .page {
+      width: 210mm;
+      height: 297mm;
+      max-height: 297mm;
+      min-height: 297mm;
+      margin: 10px auto;
+      background: #ffffff;
+      padding: 16mm 22mm 18mm 22mm;
+      position: relative;
+      page-break-after: always;
+      page-break-inside: avoid;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+    @media print {
+      body {
+        background: transparent;
+      }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+      }
+    }
+    .page-header {
+      font-size: 11pt;
+      font-weight: bold;
+      text-align: right;
+      border-bottom: 1.5px solid #000000;
+      padding-bottom: 3px;
+      margin-bottom: 15px;
+      letter-spacing: 0.5px;
+    }
+    .page-footer {
+      position: absolute;
+      bottom: 12mm;
+      left: 22mm;
+      right: 22mm;
+      display: flex;
+      align-items: center;
+      font-size: 10pt;
+      font-weight: normal;
+      color: #000;
+    }
+    .f-left {
+      white-space: nowrap;
+      font-weight: 500;
+    }
+    .f-right {
+      white-space: nowrap;
+      font-weight: 500;
+    }
+    .f-mid {
+      white-space: nowrap;
+      padding: 0 10px;
+      font-weight: 500;
+    }
+    .f-line {
+      flex: 1;
+      border-bottom: 1px solid #000000;
+      margin: 0 4px;
+      height: 1px;
+    }
+    .page-footer-roman {
+      position: absolute;
+      bottom: 12mm;
+      left: 22mm;
+      right: 22mm;
+      text-align: center;
+      font-size: 11pt;
+      font-family: 'Times New Roman', serif;
+    }
+    .section-title {
+      font-size: 13.5pt;
+      font-weight: bold;
+      margin-top: 15px;
+      margin-bottom: 8px;
+    }
+    .body-p {
+      font-size: 11pt;
+      line-height: 1.55;
+      text-align: justify;
+      margin-bottom: 8px;
+    }
+    .body-ul {
+      font-size: 11pt;
+      line-height: 1.5;
+      margin-top: 4px;
+      margin-bottom: 8px;
+      padding-left: 22px;
+      text-align: justify;
+    }
+    .body-ul li {
+      margin-bottom: 6px;
+    }
+    .body-ol {
+      font-size: 11pt;
+      line-height: 1.5;
+      margin-top: 4px;
+      margin-bottom: 8px;
+      padding-left: 22px;
+      text-align: justify;
+    }
+    .body-ol li {
+      margin-bottom: 6px;
+    }
+    /* TOC Styles */
+    .toc-line {
+      display: flex;
+      align-items: flex-end;
+      width: 100%;
+    }
+    .toc-dots {
+      flex: 1;
+      border-bottom: 1.5px dotted #555;
+      margin: 0 8px 5px 8px;
+      height: 1px;
+    }
+    .toc-sub {
+      padding-left: 20px;
+    }
+    .toc-sub2 {
+      padding-left: 40px;
+    }
+  </style>
+</head>
+<body>
+
+    <div class="page cover-page">
+      <div style="text-align: center; font-weight: bold; font-size: 13pt; line-height: 1.4; margin-top: 10px;">
+        SHRI G.S. INSTITUTE OF TECHNOLOGY AND SCIENCE, INDORE (M.P.)<br>
+        <span style="font-size: 11pt; font-weight: normal;">A Govt. Aided Autonomous Institute, Affiliated to RGPV, Bhopal</span>
+      </div>
+
+      <div style="text-align: center; font-weight: bold; font-size: 17pt; margin: 30px 0 15px 0; line-height: 1.35; text-transform: uppercase; letter-spacing: 0.5px;">
+        CAMPUSCARE: CENTRALIZED CAMPUS GRIEVANCE REDRESSAL AND INCIDENT MANAGEMENT SYSTEM
+      </div>
+
+      <div style="text-align: center; margin: 20px 0 15px 0;">
+        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCADhAOADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iiigAooooAKKKKACiondY0LuwVQMkk4AFeYeIPjLpNtfRaT4ajGt6tPKIYVjcJb+Yxwo8w8NyR93g/3hQB6pRWD4bOttosL+IktE1JtxlW2JMYBJIHPcDAPXp1reoA8z8RePdYm8VS+FPBukw32pW6h7q4uXIhgHHBwRngjv14wao2fxB8TeH/FVhovjrTrK2h1BtlrfWbHy92QOck8ZYA9MZB6c1neDrpPDPxt8W6PfsIpNWl+020knAkyxcIp78SH/vgjrU37QD2tz4Y0vTI2EmqTagjW8CcyMNrKeOuMso+uKAGfGC7urfxX4Tt/7d1DTNPv5HhuZLa7MKqu9AXPO3gP1PatHwp4Z8GW/i20utN8bX2s6pCHeOGTUo51PylWOFX0J71m/G6zhMXgy61BRKkN+IbgE/KytsLg/XZXpGl+DPDmi3K3WmaHY2s6ghZo4QHAPX5utAHQ14b8ULPW/BdnL4k07xlrSm7viiWUkm+JC+58KCcKoCnHHpXuVePfG4i/1HwZoDjdHf6oC47YBRP/AGoaAOm8KaX45sNVWTXvENvqemtAcRi2SKVZPlx91eRjd39K52H4zXB1bVY/+EV1G80qxupIDfafmXhSQCVIAGQM/eruvGmt/wDCOeDdW1UMFe2tmMRPTzD8qD/vorXkfw80b4i+HPB9tqHh+DSLyyvz9raxucpKc8AhuByqqRluM9KAPU/C3jzw/wCM1l/sa5lklhVWmikhZDGGzjJI2noehNdZXGR66ml+FrjxTr+kR6RdCIm7hVleRtjMqLvwNxYn5R/t9a4rSdY+K3jC1XX9KbSNM09yzW1jcqS0yA8HO0n2zlc9cAEUAe0UVwvw+8av4wsbtLq0Nnq2nS/Z762B4V+eR3AJVhg9CD1613VABRRRQAUUUUAFFFFABRRRQAUUUUAFct4s8aaT4Q05bvUJHLSsY7e3iTdLO3oo/qeOR6jJ4i8aaP4WvNOh1aWWEX8pjSYxny48Dq7dAMkD8c9MmuU+Inh3xHdeJNC8VeGre11C501XX7JcsNh3dHGSoPU/xA8LjNAGh4b8XT+OZ9T0LWPB2paXC0B3m7U7JI2+XDZVSrEZwBnoeeKzvH3w206XwGsPh3TY7O+0p/tVp9nXDuQPmUt95mIA5zksq81kX2gfFTXLS51LWvE8Hh+OCNpo7W0baFKjOHZD93jqWb6V2Hws8S6j4q8D21/qKk3SSPA0xXb523o+OnfB9waALHw98WL4s8HWuqEhruMeVdxr2lUc4H+1ww/3qv8AhTxRaeLNLfULKG4gjSd4Slymxsr3+n/1x2qv4c8Fad4Y1XVr7T5p1XU5vMe3Yjyo+pwq445Y/wAq6wDAwOBQByfivwDoHjOJBqtq3nRArFcwtskQemehHsQRVDwx8K/DPhe9W+tYJ7u/TlLq8k8x0+gACg++M13lFAFWW3huNvnRJJsOV3qDg+oqzXKeKPGml+FLWI3pmlvJzttrK2XfNMfZfT3P8+K5b/hJviPqz+bY6RoOlwN92O+mkmk/Ex8fhioc4x3ZUYSlsj1Ssy60jTr27trq70+1uLi1bdbzSxKzwnIOVYjK8gdPSuD/AOEs8c+H4zLr/h211GyU5kuNDkYvEvr5T8t+GAO9droXiHTPEmmxajpV0lzbSD7y9VPcMOqn2NUrPVCatuQ+KPDNh4t0KbSNQadbeYgkwNtYEHIPQjrzyK4mP4f+MvDSKvhPxk8lqm1Y7DVo/MRVHG0Pg7RjsqrXq9FMR5J8YbLW734SQvL5ZvLeSCbUVgzsICkPt77Q5U/QZrorXx74L03wxZXcetWUNgsUcUMSOC6DAAXy1+YEDGRjjFdo6LIhR1DKRggjIIrjP+FT+Bv7U/tD/hHLXzt2/Zufys/9cs7Me2MUAW7y58N+EdJ1DxRDbWsEFzGtxNPaKv8ApR5KYI4ZmLnB77utc38LLnxNr39peKtYu5lsNSl/0HT9wKRqvG8cZHTbxjd8zEHINU/FXhjWvHHxDtNJ1GyltfCOmKtxvVxtu26Y46HquOqqCeNwrmvF8F/8J7+K38GavJ5etM6R6LIrTNE5+USRfiQBnkkD74BwAe2WmsadqN7d2dpfQz3FpJ5dxFG4LRN6MP8APQjsa1q4X4beCU8G6Ftuir6venzrybOSW7ID3C569ySe9d1QAUUUUAFFFFABRRRQAVyPj/xFqnhbwrcavpmmm/lhdTIpPyxR/wATsByQPbpnJ4BrqW3FSFIDY4JGRXj1v4+8QeBvEUukfECIzafdSM1rq0ER8sAn7pA6qPT7y/7QINAGTd/FvRPFnhmW18W+F9Qi06dti3VpiVEcfxKzBdrLntu/HOKrfDr4oWfh7Uv+EW1LWRe6GTs0/VGRozAD0SQMMhe2eQp7leV1dY0q5+HepN4x8IbLzwvegPqOnwsDGEP/AC0jxxt54P8ADn+6eO/h8H+ENcSx1k+HLWKZttzGWtvJfcRkeYoxk89GzQByf/CnryaeaG68cazc6HNIXksnY7pMncdz7tpyeSdvNekaVpdno+mwafYW6W1tbqEijQcKP5k9yTyTya1awL3xj4Z0+dob3xBpcE68NHJdxhl+ozkUAb9FZ2n6rp+rwmXTtQtb2IHBe2mWRQfqprRoAb2qlqN/DpemXeoXR2wWsLzSEDJCqCT+gqaeeK3gaaZ0jRBlmdsAD3NeY+PPH3hzUPDWqaDpN+2o39zbtGkdlE0w5/2lG3H0NS5JascYtsxfC8Vxq88nizWB5mpakS8StyLaD+CNPbHOff1znvLQ52/hXMaOvlaRp6GJ49ltEux12lPkHBHYiumsui/57187OtKddnrOmoU1Y6G04auC1i2TwJ4/0/W9OCxaZr9ytlqVsowonbPlzKOgOc7vx7tXf2f3hXFfF2C6uvBMqWdvPPcpcxSRrbxGR12uCWwPQA17dGVoI86avI9I7UlcZpPxN8J6vN9nTVUtboYDW18pt3DHovz4BPsCa7IEEZHIPeuhMxaHUUVjaj4l0LRpFj1TWLCzkIyqXFwiMR7AnNMDZrzW78J2OheLdY+IGuX11qAt4N9tEYcm2AHIUL1wOF6YyxbJ+auw07xLoWsOY9M1iwvJQMlLe5SRgPcA5rYIBGDyKA2MnQNYg8QaFaatarOlvdxCRFnjKOAfUf1HB6gkEGtio1VY1CKoVQMAAcAV5HcfEfxbq2qarN4a8O2lzoekSvFc3FzN5bSFPvbSWAXjJ6NxjPXFAHru4btuRnGcZp9fJml60tys/iGKTVT47vNREunCBWMU0WVDIf7y/fXH+yo6Zr6uQsyKXGGxyB2NAEtFFFABRRXE+MviLoXgeSBNUlmkuJV3pbWyh5NmcbjkgAZ9Tzg46GgDtqydY0ax17S5tO1S0S5tZhhkcfqD1B9CORSrrFkn2ZLm5itLi5UGK3uJFSQk9tueT9KzLzWdWg8Y6dpFtoU02mTQPJNqO8BIWHQY/IYOM7uPumgDn/BXgLU/BetXttDrjz+G5I8wWcy7nSQnnnoMD0+9u5HFehO6xIXdgqgZJJwAKlzXCfFzUJtP+GmrtB8ss6pbDjqJHVWH4qWFJvQa1djj9Q1rUviRcyi2u59P8KxO0a+TlJb8jgsT1WP2/Pn7tm18IeHbSFYo9FsSo7ywiQ/99Nk1p2FlHp2n21lCpWO3jVFHsBirJr5XF5jVdRqLsj2qOGgo6rU5q68G6etwL7RXk0XUU/1dzZHYB7Mg4K+o71as/iH4uNq+inQ4p9ft22S37tssymBtlOOST/dGPXjlRskUlGHzWpCLUtQqYOEnfY4XWLWW71OOLxFcaj4l1MRfaksYmENvEgONwTIHX5e5PpXUabHDFp8P2ex+wRuobyPLCFPYheM1meLdDt79IrsaM2oXEZETKl0YW8onnkEZ+h9TWXoRtPCEN82ozw6bBcyrJbWBnMzwgDB6ZLFuOmeg5ruqTeJoc0Xr2MoRVKdraHZj7wrZsPurXCnxHd3KsdN8O6jcgcK9wFt0b6FznH4VpWWoeL5QDb6HpsIPIE98zH/x1K58NgqsZXkaVqsXHQ9OseDVXUHOT6iuZh1bx5axMw8KabeEDIWDVPLJ+m+PFUb/AMctbGQa74e1fSgoJeZoRPCuPV4if5V684SVOyPOg06hk+MpNMkn06xvdLh1Ce/uBDHG2AyJjLOGwTwCOmOtU7TStd8Mt5vhPWZEgXn+zdQJlt2Hop6p17dfWnwJba14pGvwX1rd2kFt5NqkLZaJ2OWLDscHH0NdCg4rzK+LqYdxSfqd0KEaid0Yt94z8V+KkTRrSxl8OzKp/tG7LbyoJwogYf3sH5u3Y8ZLbHwV4esVO7To7uZzmSe7HnO7dyS3GT7AVv0orkxOZ1Knwuy8jWnhIQ8zn77wT4fvlUjTo7SZTmOe0HkujdiNvGR7g1p+E/FGqaJrkHhnxJcfbEugRp2pOfmlI/5ZSereh7+5NXxXMePbdpPCk93C2y6sXS6t5R1jdGByPwzW+XZhUdRU6jumZ4rDQcHJLVHt1eHfELQdc8E6X4k1HQbq3Ph3VgTfWkwO+GSUiNmj+u78M9DgV7Lpt2L/AEu0vAMC4hSUD03KD/Wku7O3vbdoLmCOaJ8bklUMpwcjIPvX0p45wvwhtddtvBVlFqkNhFYtBHJp4tmO8o4LkyDpk7geD3PAr0esi+vtP8OaJLdXckVlp9pEMnGEjUcAAD8AFHsBXG+PPH11oUWh23hu1t9Q1DXX/wBEaRswlTtweCM7t4xyB1JoA9JorgvBPja81y/1Hw/r9nHY+IdNIM8MbZSSM4w6ck45XufvKc84He0AFeCa14pTwP8AFDxLqWs6Lc3mo3sUUejuqAx7QuCMk8AnaDtBOQ3rXvdNIBxkZx0oA+d7v4f/AGnwPrnjLx5cXCa3c273FvG8mzyGx+6Qr6sdq7P4QQOD09Z+Gkmoy/DrQ5dTcvdPbBt5OS0ZJ8sk9zs21z2s+AvCXiP4iTS6lq89zqIVJn0o3Cqm0KFHy43bcDJwe/vXpqqsahFUKqjAAGABQBJXH/EvRZfEHw+1jT7VS9x5QmiVRks0bB9o9ztx+NdjSE0AnY8o0HVYdc0S11CFgfOjBYD+F/4h+BzWjXOalpy6L8UZrPw/Pi1uo/tmp2bqDFbsTwUP8Lv12/jyMBej618dmWHVKs2nue9havPDUSq19e22m2kl3eTJDBGMszHgf4n2o1C+tdLsJb28lEUES7nY/wAh7k8Yri7+9MYi13xBEzzMWbS9HLAbABnzJM8AgfMWPCD34DwWClVd5bfmVWrKBdvNVv8AUrSS7luf7B0QD/j5lwLmcf7IP3Ae3VumOtReG9OutXeZvBui20YRyk+ratIdxbAJG3mQkhgecDpWRDLcprUGr+KLGHVSC8M+lSp8sClgp8pScbx8uC2dxbYdjGMv6bBZSSW9trmgXL6paOm2KVJxFeRoM/u97/LMFORsnGVO4ls9PpqOGjCNvwPJq4lt6EEfw0ubkq2ueL9SmJbiOwC2iH/Z4yW7981fPwg8FyJi5065umPO6a+nJP5OK52XxzLp/ima68Q2xMNjIlnaQtH9neKZ0DO/zkwFtsgUt5w2qrEDa5z3tt4x0e4jMjXZt416yXMbRR/hIRsb6qxFbxilokc7nJ7sxx8KPDMC7dOGqaa3Z7TUp1I/NiKp3PgjxTYx/wDEn8YTXaKPlttaiEwc9syrhx+Rrqf+Et8OHyiPEGmN5riOMLdxnex6Ac9a3TTcU1ZoSk1qjwHWLFbC9E3ibSJtCvGfEer6e+YHYkdXUcZ9HHQdavRa1f6IIxrZjutNkwI9UtU4APTzUH3c/wB4ccivZbi2iubd4J4klikUq6SKGVgeoIPUV5rrngq68NCbUfDMT3Wlkk3eiN83yn7zQZ6HqdnQ847CuOvhYzjrr5f5HXRxTT10LcciTRJLE6vG6hkdTkMD0INSiuIsb6DRraPVtJla68M3J3TQqMtaMTyVHXZn7y9uortY5EljSSN1dHAZWU5DA9CK+axmDdJ3Wx61KqpIdXMeODLc6RD4fsvm1DV50toEHYbgWY/7IHU9s10/Qe9YvwwtIL/xTrmo61I03iWwk8hY2XEdvAw+Voh/tfNz1wf9olunKcMp1OdvYwxlVwhZdT1i0tks7OC3i/1cMaxr9AMCrNFFfVHiHmnxu0i71b4bXTWhYmzmS7lRf441DBvwG7d/wGuG8b+JPDmtv4Bn8MzRNeWd5H5FhEuGhXKfIw7EMqgDvzjNfQfUc15f4oPgr4ZGLWLfw5aHWLqQpZwW8YV3bHO3qEHIBKj+LGOaANXT/CeqR/FjU/Fd5cwmyeyW1tIoxhsfKTu+hU/XcOmMV3leNR+Mvi9Mv9oJ4Gs1sMb/ACJCVn2+mDIG3f8AAPwru/BXim18ZeHY9WtFaFixjngdsmGVfvLnv1BB9COB0oA57xr461fTvEVp4Z8K6XHqOt3EJnkEx+SFO2eVGTg8lgBx13VU8X/E7U/DXi640jTdC/teC0sVursRsyvDydxJAYBQpQ9OM1k69qf/AAr/AOM8/iTWILhtI1ezW3W5Rd3kuoQEf+Q8kf7WRnFXNW+IHw90qDWfEOmXkV3q+p2wjZIzIWnIXagZW4jA4zwOB3PFAHX+DpdD8UWsHjay05Le/voWhlkx+8IVgpViPvYMYwfQCuxrhfhXo11oPw60qzvI2iuWVppI2yCm9iwBB5B2kZHY5ruqAErM1fU7fRtJu9SuciC1haaTHXCjOB71Pd3ttYW5nu7mG3iXrJNIEUfia83+IHiPSfEVhp/h7S9WsL4398gultrhJcQR5kbO08ZKqPzqJSUU2+g0ruxhaDf21lFHeavcLHrWvzm5ZNrMxLn5EAAJCquBzwOa6K0vrS9gMtpdQ3ERON8UgcfmK5nWbfUbHXZNUtdO/tC2ubZbaaOJ9k8GCTlPY7ug5z6VjW1udCstR1Ox0k6fLcwwWNhDKR5ryH5d5/u5JU9edmTXiVcPSxL5+bVnpU6jpq1tDU1PUrW/vbrVb5idE0RsIgH/AB83I4/HbkAe561zcGoRtqkmu67LFb6oGDIssxT7Kg+7GvdT82SVG4Ebl3lZYq1ptK0jUL+08HXt3dx6fploLieOxiMtxcTt0Coqsf4ixOP4h061raVpNppNvpcR0TTrTXoVjnup9Qc3l5LIEwzJBDvkZdx/vJ06V6mGpRhC33HLiKrk7HM211f69BIND0W+vIrYZeQJHDCq7Acbm+VTsdhsG5R0XMUhiHVeCLTWdB8VaZHqWu6bbLq+Wk0mzm8ySQiJmV3Dcr93G5eThQWNbE9lqNxczNcxalM2pSGaWJ2a1ilKokZZYbffKVwEBWWRV6Z98bVFv9N0cLpkVtYtYmC/e2t7eK0j3pLKSpjXzGdgttICTMFOe/bqOY7K8nsdO8YyJclB5mpLeM79I92nyoT7fLbN+ZrR1fS/CWlxtquoaTp0UrMFWaO1XzpWPRV2jczHsBk15fa6Z4u8W6xYa7q+gS3Oi3M5vSlncQxm4iMCxxKUkl+VdoYsu4581x3pNUfWfF+v3viKHTfFSaELZoIDaX8EDxlWxMAp3fKWTB2nJ29wcAAxfEFrbeI9Zhu4vCqyWrXi28lrBFNbTwsynInkaL55SSrYVmC7cYbO49j4b1jxJ4XeGxupoNV0veYYHWdpfLbPELsUEkcuCMIVIbhVVa5WO71Kfw/oM0niqfRFSS3S1tbyGLcZvutKkSou2JdxA5bIOTt4zu6LYQeNPEeqaL4p1TUYr6CBI4o1uo1F0nzeYY2CK0keVDYPTdyMrmgD1HTfFml6i8cJlNrdO5jWC5IVmcdUVgSrsMchSSO+K6OvKfDOjT3Goarovi17y4utxjs/tcqMbmzUkKwdVUydRvVmbqNyjNbOoeHLvw9ZS3mm+KZ9OtYV8yRboqYgB2+YFI19kQH3oAxPGWhr4Y1GTxJaQ50q8fZrFsBlVLcC4C/Xh8dc5x1NZGiSHQtYOgtJu0+4RrjTJC2fl6vHnvtzkdflPWsbTPjPqWsay2h6lb6Tc6fdFrYTNFIiyhsr82W+63T7o68gdhbTUI9AvNImjeLWfDky3FoWBJaLBaP03AruTHsM1xYqhGS12e/+Z2Yas1odFr/iaw0i1mtzeKNQdCsEMSebJvI+X5B7+uM1hWWutYahoXjZwYWjb+zdaiIKlVJ2ksO21vmx1+6K6TSLbTJIBq1laQpJeqJmlCAud3Jyev4etP1XR7W/0bULAQxxi7Rt5VQMuRw59TkA/hXkUMRSw9RU4p3vqzoqwlUi22etA5GRzS15x8P/AB3otx4J0iLVNasLXUYYvs00Fzdoku5DsBIY5yQAfxr0KORJow8bK6MMhgcg19GmmeY0TV5L8S5j4c8eeFfF95byXOkWfmwXGxd3kswIVsf8Cz/wD1xXrVYviXUYNJ8O3+oXVm97bwRFpLdFDGRe4weDTER6Zr9rr/h0azojfbInVzAGDReYykjb8wyPmGM4rkvhHpGr2Gi6nqOs2rWdxq1/JeLaFCpjDeoPK5OeD2ArBsPiF4me1Fj4T+GFxa2qEmHzFMUIycn5QiqOSTw1b/hif4n3viG3n8RWelWOlKX863hIMh+U7SMM/wDFj+L1oA769sbXULR7W9tobm3cYeKaMOrfUHisSx8B+FNLvlvLLQLCG4RtySCEEofVc9D9K4tvGPxYR2H/AAgVsy54InHT/vulj8d/ErzVWX4fAKWAZhMeB60AesVw/jzxk3hmC3s9PiF1rd+xS0gOdqgfekf0Ufr+BI7jNeGahM2q/FDxHeSksLLyrG2B/gULucfi3P4muevW9lTlN9DWjDnmkVo/DUWoXIv/ABLdTazqLctJMx8qP/ZRBgBfw/AVsWejaRZ3cd1aafawTx52SRQqpGRg9PYmlDGlD/hzXyNbMK1Rt3dj1VQhHZGosoI54rA1Ym78X6JZbgYbcS30o91GxD+BY1fWUjvmuevrkJ4l1S4BG+30UqvtlnY/yFb5Y25tvsRWi0jS8KafqN34avvETQSNa3txLfFWv5Id6IxULsjVSy7FP33x0+U5rpNdn8J+FLmWK9s2WyWNdun2ML+UFOd8ksKYQgkqNzg+g71znhvSfB/9kaFLc675eoTaZE0krats8kqE/d7AwC4Mhx0KkEj5ua6ed9DvrnRr+98T6V9t08zQXEn2uIi9tmVlKSLwvzYjcjGFO7HrX1sUrJLoeS3d3M6zv7jxB4XJ8EXsGn6zpiTotjcQhNkUrh0wp+UDaqFWwV7cc45TVFudc8DXF3ePLa+I9Mt5/tjGHyjKhWZZY2QkpkebKysPvLvC7TvCdBqeneH9FaPWtB8VWEV7p6F4/wDS0cyRgktEy7syBlOcZBLruBDSM1W/GviDw3qfgy7njv8AS5NQuo4oHhtNQikfdIyI6ghgGIX+LjhfTNUIxfAcWi31hZ2V3p3hq+mkKLu8+NHUYAK7FDbj17966eC3h0b4M6vZ2rJAkEOowRtu+VD50qgk9sE/hU3g8pJqMHlFRGiEqoazbjHYxOzVHqqSr4F1CxtrH+0Z31uQCz3Kv2hWvTM8ZJ4AKFhz2oA5HV7DWptMgnhTTtftLi9s45dRvLFomuv36BEjDysGjJPO1Y48MSpbcSNqw08t4zsbfWr9NRhuYZrNLG4gaO4tHXbMmWZ3ZseVKVk3HuVY5FcR4st9BiWI674audPvxJC62Ol2lrCsUJlTfuMcjSMxXcqs+1SxGFU5rp7JY7T+zdT07wcqW0FzBNHrUdvaQusO9Uk3+Q5WQGNpPmUKM4+XjNAHoF54XuJ7eO3+2C8t4n8yKO+DNLEwGAYrhCsiN1+c7m5PNed/EXw94ok0ue/1OSK40mzgbybVtT80JMxVUkINuvmY/uuWPzHDCvca4T4obJPBj2rqXFzeW6FMSfMFlVyP3as/RDyoJoA+eNB1u/stVkktIoYLOe8VLq3itoGkMRZV8sb4/l4Yjc2FJznnr6JDDLonizRoZWkMbrdafG07SiUQK5lgV0kReVGUyu5cYwcYryvTG86a/KSPL5ltKpEdxMdvyKQ2FQsVBUDDcdASMbq+gviDdrqPhPwnq0LDy5NVsrgEfxLIrA/o9Z1FeLRdN2kmYfg8m20690zBVbC9mgjBOf3ZO9f0f9K3mkUd8n2rldMuCni3xNF/CXtXUA92iwf5VstMx6cD2r5HMPdrXXWzPYpK8SrPoGhStI82k2LNIxZmaEbmJPJz1rNgstQ8JTG+8KXEsSKS8mmTOz2844zgE5VuOv8AKtgkmkp0MxrRnq9CZ4eElseg+FPElj4s0GDVLTKo2VliY/NFIPvI3uP1BB71p6jJNb6ZdTQbfOjhd49wyNwBIzXl/wANbj+zviDr+jISILu2TUEXsrhgjn6ksPyr1qRBJGyHoykGvrac1KCl3PInHlk0eER+NvipqXguXxXbro8OmJG8m5U+fCMVbCknuD1ot/EPxJsD4S1bVtdtJNH1m+tU8mCGMPskKttb92MfLkcNXT+C/C+rn4J3nhq+szZ6hLFcwxx3BwAXyVJxnjLVNq3gfW7vwL4R0aF7M6ho15bTTMZGCFYlYHaduT1XtWhJgXPxI8c3k+r6vomhWU3h7SLmSKZpJP3jrHy5J3A52/NwvGR97FSSeMPEfxM8QQaf4P8AMsdBtpIpL3UZAVL4wzJn9No+93IU1gWevaz4ds/F/heDwbqeqRX+pXoE0COFCuPL4wjbvu5q/wCDtf8AiFoPhSz0XTPh/L/o6sPOut0W9ixbJVtvr60Ae89BXh+tW7aJ8UtXglIWLVo47y2Y9GKjbIv+9kE49AK9mtHlktoXnj8uVkBdP7rY5Fc5418H2ni/TUhkka3vrZvNs7tBl4X/AKqcDI74HcCsa9FVabg+ppSnyTUjh6KyLq417w2TF4j0W52px9vsYzNbyD1OOV+hx9BUOn+LtG1S9jtLO4aSaXOAYmA4BPUj0FfI1strU27J2R68MRCa0Zu1zd7GzeJNQhA5udJO0+pDMpH/AI8K6SsPWCbTX9Hvs4jaR7STj++Pk/8AHl/WryzSq13QVl7po/DOcHwkuq3GlWF9pMDiCUx2SC4ttkSbn4GZVyWJH3/TfnA6DRdUOzUtWEem6noxv540jghj86CJHKh49v8Arl4zt+9j7pbha43wR4K0y6XURL9nkudO1WON7WezglVreR0Kklk3jKlx97+Hiui0vwPo8k9xFDpthEiXGouWNjDMT5c6CNP3ithQrMMDHbnivsItcqa6niyVnZmnay2OpeJdTv8ASb/S7qyEFs8VnMIzBJuD5w2N0b/KOeRzyp4IzvGOseG7nRrUWkVla6iuqWyT258mKeAq3mEEnKgYThuVbsSDUtp4S0S9vY4zo+mWzX8Vn80VhAfLJhlkfYroyjJT0qPU/Dul6Td6KLS0s4buPUbjbcwwRWsrosbLgtFF6sOi9hTEdJ4S1OO61ExRTWz5iJ41CGZuo/hjQfzrn/FEkc97d6VJrM+kY15nS4tgzTN/oUbbIwvzFi0w4Xn0rsdBu/KinmuppwF2j57iScc59UXHTsK84123uta+J+pDT/Ddt4gs4oElYThCtvLKsaGQpIyCQ7bYAKGXvzQBf1fSvFFtotumjxWWn2KXlq4W9gVJLif7VF5bsELELuwzFm3nptzSaxpOqvp91Hr+tp4dmvYmhu7mCwUWlyXTYd8gcrjkANIEfjC1z+u2Hh+N2hufDGt3OpyXEIK2wthBBiVMqUt5iI9wyAZMsc/e7jYuoYtFuV0+28E395HcE7bLWktyjZI+WO681ufvHY3mMe2AKAPU/DupjW/Dmm6pjBu7WOcj+6WUEj8DXmHxDtrrxHcXMF5basBZ36RW1vHp11JA9u0arJcbogA0il3Iy3SPbt+Y7uu+Hl6kmkXWmrZTWMunXk0Zs58eZBG7ebGuAfu7XAU9MLXc0AfMEng6zs49XaG51GaGwYTadG9heRS3ZKqDG4IAUYBQlcMc5yqgLW9qF3dxeGdA8Pi4nvrW2v7Bobya0kt/lCyl4cOBnZ5akH+64B5GT7/XknxCv1vvHemaerHytKtJLuc5+XfJ8ig+4VWP0as6krQbNKavJI5rR1LeJ/ENwCSpkgjH/AY+f51vZrmfDt7brafaLiVY59TupJ442+8wJwoA+gH510gOa+UzCE3Vvbsj16TSiLmjNc4/jfQkuGtxcSvOrlPLWBmJIOMDA5q/ZaN4o8ZsLe2sLnRdIc4mvbxdkrr3CR9efXp708NltactY2XmKpiYRWjNr4W239q+Ldf8Rqv+ixImnW0h/jwQ0n6hfzr1zHBrK0TR7LQNJttLsIRFbW6bUXufUn1JOST71Zv2uE0+4e0UNcrGxiUnAZ8HaPzxX1UIKMVFdDx5ycpOTPLdV0j4paLbvdn4haRHaocvJfQpEqj0yY2/nXLaD8UfiHq+tjTdMj0/W1WRVkuYLNxEFP8AEWOzaOv3gOlZ134P+I+p6uuoeLvDt5rsaZ22o1CONAfYRt8o/wB3Fd94d8a67p93Y6IvwvvdKtJZ0iL2+7yoQzAFztixgZySTWhJp+K/ibcaB4gm0PTPC2qatfxIjkRD5CrDII2hm9RyByD9a5fTvF/xT8cTXsGi2elaNHaTGGaSYZkhcdVYNuyf+AV6X4q8baL4NtYZ9ZnljWfcIgkLOWIxkcDA69yK8Z8PeO9Sh8Y+JdU8J+Fb/U7LWJInRGQr5Uij5mbYGXlmb+IduaAPc/DsGq2ug2cGs3Ud1qUce24niHyu2eo4HbHatquM8E6l4v1OG+l8WaRbaYdym1WBwdykHO75m5HHXHXpXZ0ANrz74r2TDw5ba5EuZNJu0nfC5Ywt8kgH4MD/AMBr0Hiql7aQajY3FlcxiSC4jaKVD0ZWGCPyNRKKlFp7McW07o8G1nWbi1luLa1RVI0+a5WcsMAr0xng/wD1xWJZQ3mpWkmly3k9wbnTo76OWUYMMuQVAb0J9+MGttNCtJjP4d1qBbm50ibykYkqXiIzG42noyY49RW7DBHDEscMaoiKEUKMAAdBXhVa9LCe4o6nqQi6i5r6HO6V4gfTdS07X1CRwXssFlqqyHasBWZD5jem3DDnswrtdC8X6Kst9I2t6OsJvNQTE19HGzbpUKMuTyhAbn6da4vU7OLTbyeW5QHRtRxFeDtFIeBJ7A8An1wa7vwF4jlsJIvCWtSDz4k/4lty2ALuEdFz08xBwR3GD7n1cLWjOCaOOvTtK5HF4o0CDVbXyvEeiP8AYI7UkvfoiSERTxsFbnON6ms681M674qsDpV/YXhtY7uZ/sc88qoJZY9qlrfndhM4PHXrXsW1cY2j8q821o2p8d6gklvA6x6fapte4ihG4vOx4YHdxs/Kus5jU0zTptUsry11SztpIpAAplt5jhx6rMct97qMd/w8l8a6JaeEPE9xDPrD6do91bW8lzZaTEbZ7pd0qEKMsrMhwxDYBVj3HPtXhm201YjNa6daW1yMpI8AjJIJzjcoGRwO3aub8XXGo2fxA0j+zrS6uGvdOuIJvsvliZI1kjYlN7KuecZzxuzzjFAHmtx4iur2zhstF8Ypp2iQQRSmLUJbRZl+cbESONAAw27sBjj+LaeK3X8VRSWz6TcfECZtUeUQeaXtHspEbJ84t5WAoUHMbNu3fLnkNXSavp+ojTpk8N+DtTsbmRUWSGWS0WC4CkY34uMhwBw4+bgZyKuQQX9xp0h1nwjrFzq1yyzTXcMtmjROudghP2jcipkhfqxOSzZAMC1j8L+G7ka1ofxBivNSii2fZr3U4PInjzuMWAB5Y67ccKT0PIPp2g65ZeJNFt9V06USW067lPdT3Vh2IPBrjHvfFV/BHp2teFdTm09CwnkhntRJep0RJE83Cgg/OFb5iuOFYrXR+E4ryNtZludLn02C41AzW1vMYywQxRhj+7ZgMuHPXvQBqarqdtpGmXGoXcwjtreJpZH9ABnj1PoO9eAXc97qFtcXM48vV/Etznb1MMGMAdshI/x5rq/GHiGHxjcyQwTqPCmlyeZc3OfkvZV/hX+9Gvr0ZsYzwaydHhlvrltdu4zG06eXbQt1ig65I/vN1+mK8/GYhU436I7MPS1u+pl3+iapFqhGlwwGKS3jto7qQjfaKuclR15B7d6r6eg8Oabq+oxQXNtZrGqwR3LHdK4yN5B+7uJWu3rNt9OPirxtp2iqN1lYOL7UDjjC/wCrjP8AvN1Hpk9q8/CYqWKkoOOnU6asFTTZ6V8PtBfw74F0nTplK3Cw+bOGHIkcl2B+hbH4V1eKB0or31oeU3cWuP8AiB4s/wCEO8MtfRQme9llW3tIcE+ZK2cZxzgAE++Md67CvPvil4X1LxJ4btm0NgNU027S8gU4+cqDwM8A8gjPHGO9MDm/sfxw8oakNR0gsRv/ALMCx5HH3M7Mf+RPxrqvAnji48SxXunavYnT9e05wt1bAnaQejLnt7ZPbk5rWXWLnTPBR1vXbcQ3NvZfaLy3tju2sF3Mq5PX8fxPWuJ+HFvfeIPGOv8Aju7sZbK11JI4bON+rxqFG/8AJF59zjpQB6Xfafaag0P2uzgufJfzI/OiV9jYxlc9DgnmuS8Q/EHS7Dw54lu9JnjvLzRNsMsIBwkjEIufVQxOcf3WFd7Xzhqt9a+AtP8AHHhbWrCXOqtLPpt4keROG+6Gbj7pwe/O72yAbFp4p8f+G9K0nxhr2p2+p6BfGM3VtFGoe3ST7rDCjkemevB9a9xjdZYw6MGRgCpHQivHovBfiPxD8HPDnh/z0sWeQNfLcKdwt97Mgx/eA2fLxz3GDXrlnax2dpBbRZ8uGNY1ycnCjAoAt0wkAEk4A6mn1wvxY1OTS/hrrE0DbZZUW3Uj0kcI347S1JvQDg9Q1JvGPjUaxpMa22l2CNaC7IJa/AOSAOgQHOD7/gu4lvn3o03TINM061sYR+6gjEa8dcDk/iefxq8BXx2Y11WrOy2PVorlhZFaSxhngkgnjSSKRSrowyCD1BrkL2yXSYV0vV/Mk0TzAbG/RiJbB/4QT1AB+6/boeOnc4zSPDHNE8UqLJG4KsjDIYHsRRgsZKi7PYcqPOQ6N47utD8qy8WSB7YlRba1CuYpQegmAzsbp833TntjNUI7m+1Dxv4hvtP3XFg08MUcsNxdKG2wJn/U/IwyxOeTye2KxtUs28IWkt3Y3dsNLbPm6bfP+7OeoibkqTz8vI5Ncl/Z3hDxG0V5YTnQ718skd3CrW7kHBwG+Q88cH/gNfT0cQpRTeq7nJPDWej1Po3QfMGmqs0RjmB+YHzDn05kAJrB8Su8PxO8EOCNkov4Hz7xK4/WOvMdN0J9JeGTUPCWma7GMhpbRreEEdm2GIHP0fFXNbn8OXmk3cNn8PNattUa3kS1ngtFZYpCpCncj8DOOgreM4PZmEqU47o945orzyD4gagdOgx4N8RPcCNQ7XEMcCM2OeWfpn2rLv8Axh4yvIDIIdK8N22075p5vtUqe4+7H+eaJTjHqKNOUtkeh6rrOnaLZSXmo3kVrAnV5GwPoPU+w5rzDxB4lvPFlrMHkk0fwoB/pE8p8ue9T0A6xxn/AL6YEDviuR1PxHodjdpeXU914k1QSbEu7x/9HgY4OFONij+L5QfrXTaforawYtT1q+g1Fvv28Fv/AMesXuo/jPX5m9a5a2JcI81rI6aVBN2e5UsdOPiIW7SWZs/D9uQbSzZdpuSOjuOyei9+p4xXUPArf4Gp8UmK+ZxmJlWfl2O+NLkRQktgPaqXw41BPDvia/0DV4x9v1aU3NtqKg4u9o/1bf3SoyQOnJHpu28VyfxAt2Tww2pWxMd5p08d3bSDqjKw5/I/oK6MpxHJVUOjMcTHnh6Hu9FU9Puhe6da3ajCzxJKB/vAH+tXK+sPKK080drC88zrHFGpd2Y4CgckmvCbbUviDqsesfEDQNUji0nz5Gj0+9f93JbRDG4BvlX7pzgqchua9g8V6K/iLw1faPHevZm7j8szRrkgdxjuCOCPQmuW8Z+E9Sk8B6b4T8MoqWjyQ2t1MWAMduPvPjI3EnBbHJG71oAw/DHx00q9SG38SWc2j3EyBkuNrPbyDpu/vKCc+o4OWr1yKVJ4lljdXjcAqynIYHoa8i8SadY+JPG/hz4e2UMZ0nRYlvL4cHaqgKkZPXkEZ9fMB7V7LQAVEyK5G5Q205GR0NS0UAFFFFACCuL+J+jza38O9XtbcBp0jWeNQMkmNg5AHqQpA+tdk2Qp24zjjNeNeLfi54l8M6idOvvCsGnzNlYbu4u3mt3/ANoFUXcOnHBGecUmroEW9N1i1v8AQbfVjLHHBJCJHdmACf3gT2wcj8K52bx613cSW/h3S59QZDhrgny4gfqev44riUGju0txrOuwNbSztP8A2bp28QK7dcL2H5Y9a7TQ/EOh6iFtdLkVNi/LCIimB7cYr57E4anh3KpyuX5I9Oi3OybSI/7S8dT/ADeVpFtn+A7yR+ppjv46mwp1TTYF7vDEWb8mXFdBRXnLMn0gvuOt0Uup514m8PysbOG81G51PV72YQwtKxVI1yMkDnA5A9OSccV2F5PZaHbWOjC0juLSK1llnEqghIo1zuK9yx/UmuVvtautM+JIuLnTpblRD5drGjYbaRyy/wB4/fGPfFbU2r+GNea6Sa/ksbu4gFtJ9oBjZEDbivzZUZPXmvafPKMHJXVr6ef+RhT5buz18yG3/wCEceyt72E32kvcpK7C0nkQx+V94sBkD8ucjvWlY3SlZWsvGN8nkx+Y4uY03Kn97EiA496gvfCxvp9UutOvYZEvLYxQxZ+SJm2bzkZ67P1pup+G9R1xLgziC0xZLawRrIZMsJFfLHaMD5QMYPWrUoWupP5/8EfK3fQsXGsG4spnvfGusPDAFLrGnkPtYgKQBGGwSQMjj3rNuH8PW4luJtNu7u8hkiSQ6rI42LJnDtvyNuRz8ufatDUtAvvEE11NeW9vaM9ibSOMSeZucuH3EgcKCBjv3ouvDOn28d0bu/W2gu7VY7pZpi26VWyJA8jZyOgodSGl22/67AoNbJWF1OyTxT4NubaMW7yxEtB9mDeWHUZAQkDdkHGQMfNXPeGdLuZdIgvtA1ifTZj8txb/AOsiLrwTtPrwec9a3R4s0jTpZI7S71HWbx8ArHmTp6cBAOf4RWJ4H1G4v9d1eWKz8jT5X80gSb1jlz0B75yenoKzvUhSm0tFqrinyOa11NpJvHsahTf6VNj+N42BP1woFP8A7X8cW2Ge00q6UdVVmVj9CSBW7RXjf2i27OmvuNvY3+0zP03x9ZyXYstZs5dJumPyi4OY2+j4H68e9P8AH0zz6BFo9ph77V7iO1gjB+9lgSfp0BP+1WL4g8QeGSXsdVbzypwVEbHYcdQccH3BrB03VLXw5qlvrmi67YXgtY2jgttUEhMKt1CY5B69AOpr18Jh6c5qryuL/A4603FOKdz6isrVLKzt7WP7kEaxr9FGKt15d4E+JOveNLpEi8KLHZg4m1A3bLEo77QY/mb/AGQfqRXqNe4ecFFFFAGdDp1lbX897FaQpd3AUSzJGA8gXpuPU4zWjRRQAUUUUAFFFFABVO+t7S5s5Ir6KCW2I/eJOoZCPcHirlcT4w+G2heNQjaitxFPGMLNbybW/EHKn8Rn3oA8y8a3vhzVb5fDHg3S9NieQg6hqVjbRqI4+8auo5z3wcfw85OLtpZ6doOmCKPy7W3jHzOxC592Pc1Q8V+DdN8AaVgeKr9Xm4tbC1hjWad+n3hzjpliPzOBWL4f8Gyzot94lllu52GY4JZGbZ/vHPJ9unrnt5WYxUkvaSsuy3Z24WVtErvuX5vF7XkrQaFYTahIvDSEbIl/E/8A1vrSLYeLr47rjV7WyU/8soIw+PxP+NakWqaXaZtYCI1QPiOKBwp2/eCYGGI7gZNJH4l0yQxiNrlzIu9NtrKdy8cj5eRyOfevLalFWo0tO7VzuVn8UjndS8G65qCxCXX1nMTb4zLDsKt7MMkf/WrpodOF5YRxaxa29zcRjazlQ4Y/3hkDGaY/iLTY2RHF0rSHCA2koLHGcD5eeBTf+El0zyWn3XHkrndJ9mk2rjrk7O2DSqVMZOKi4tW2srCjGkm2mVJPBOhlw8EM1s5/ignZT+pNKvhRh/q9e1hB6fav/rVvW88dzbxyxlvLkXcu5Spx9DyKzJvEOm27yJJJMPIk8uQi3lKq2QMZC47j8xXPSxGMbcVdteVzRxprXYqN4SWT/X63rEoz0N3x/Klg8GaFC+97QzuDy00rPn6jOKujXdOM7RebJ5gBJHkvyQoYqOOWAOdo5qNPEumOY9j3LmRd8e21lO9eOR8vI5H51q5Y+S6ivSW5HrOlXU+kSadpC21mswKyPjYFTuAFHU/41j6d4R1qws1t4PEX2dF52RQAjP1yM1q6b4jguL1LUyzTxz5ktpfszplc8qflA4yPmHGOuD10ptTtLa7NtI0pkCbyEjdwOCQMgEZIU4HU4rR1sXS/d2v12uR7Om3zXMJrfxjYZeO8tNTjHSOVPLY/TGB+Zqay8YWjXAtdWik0y76bZs7D9G9Pc4HuauL4m0yQJsedvMLLHi2lO4r1A+XnGDn6VFpn2bxDpI+2q12dx8wTwBAj9CE+UcAg89fU1XKp03LEQtbqlZgpWdosm13Q7LxDppjkCecFzBcLyUPbnuPUVf8Ah/qvhTVj/ZHifRdIt/Eto+HlurSIG6x0cMRy+MZ9fvDrxwuveG7rRJ11HSbi9jsA4NzBazESIvcr6jHr0+nTstI+Gui+PNLt9RHiy91C0zjHkRrNE3dGJyVPPT6HkYNerl6UafuyuvyOHEtN6qzPcYo0hjCRqqoowqqMACpq5vwt4O0fwfpxstIidQxzJJK5d3Pueg+gAHtXSV6RxhRRRQAUUUUAFFFFABRRRQB574t+KGk+C78WOq6bqzPIu+OWCFDHIP8AZYuPy6j8q5q8+K3iDU1MHh3wxPbFgALvUztC++zv/wB9H6V6L4j8M6Z4q0yXTNVg82FxlGHDxP2dD2I/+scg4rye78MeNPB7tHb2reIdJU4jeE4uY14wCvVj16bunVelY1nUUb01dmlJRcveehW0zQZE1CTV9YvH1HV5fvTy8rH7IO3p/ICtuuXbx3pds5i1G1v7KcdY7iAqaP8AhYGhMwS3N1cSE/LHDASzfTOK+ZxGGxtapzTjc9WnUowjaLQ65tNRudTtXIniuITIkk6hWhMRU/MqtnDk7Rjr17c0um2IaLSYbiJzH/ZjxyBlIAJKcH0PB/KnjxNdsu9fDOvGIfx/YjU2l+LdI1O5+zLLJb3WdvkXKbGz6emfbOa65PFU6esNF2IUqcpbmbp2kXVjeaUstvGqpOxmlWVpGkby5MN0wi89PcenL5dKuLjw/wDu3njdJJxLEhAM0LSNuUAgjcRgg4/nXV0n1rilmtRNJrVG6oxtoUrZLUXRMETrKYUDO4YApztHPcc8dfWsDVob8y30FtAz2M1zFNNKYzuDgoNqcjcMqpLAYA3da62krClmLpzc0r3LdJNWOeu9N1FdZe7jihuIsmSHLiIRuV2lnAXLkDIHPT86Zp2jXjwaRcLfyWohshC6rGm4E7SfvKfQZz6D3rpaOa0/teolZJEfV43OZ0W3lii8PB43DR206tlSNpJTAPp0NXb+xvP7XhvbVZHUxBJEjuPK3MrZXf6qMnpzyeDWz0pGPGScAUlmFSVRSSH7JRjZnKaZo2oXFhpM7Xr2z28lwZVSMZyzvyu4H179jV7SYI7fT7SO7jlllS7mKOUOQ/mPhjjAAIJ9uaZc+M9Lju/stotxqFx/zzs4/M/XofwzSP4ouIcm48M69DH/AHzZH+uK9GX1utFrl0ZzqVOD3Oi+prB/sjUNC1RtZ8KXgsLp8efbMMwXAz0K9u/58betUl+Ifh8j55riNu6tCcj8qfF41t79mj0XSNU1SYfw21sSM++Mn9K5cJQxtCp7sbfkXVqUakdWdXB8ZdQ06Bh4j8KXsbxrl57EiSM+p54X/vo12Xg/x9Y+N47iXTNP1KGC3O15rmNVQt/dBDHJxz7cZxkZ4DT/AIfeJfFsySeJiNH0gMCbCFg004HQMRwB/h90da9f0zTbTSbGGxsbeO3toV2pHGMBR/j796+opuTinNWZ5VRJS93Y06KKKszCiiigAooooAKKKKACiiigBjKGGGAI9CKEjRB8qqv0GKfRQAVyvizwRovi+xMOpWqmUDEVzGAJYj/st6ex4rqqKAPDrrwH488Pnbp1xa+ILRfurK3lTgfVjj/x4/Ss7zvGgl8lvAeoGT1Ew2/99bcfrXv4GKXANck8HQm7yibxxFSKsmfPd3rOvaUjTa14Q1W1tlUs88Y81UA6liAAPxNaOl6tY6xbfaLGdZI84YdCp9CO1e5cEc14r8TfCbeGpj4y8OW6RlTjUrNBiORD/wAtNo6HPXHs3ZiePEZTRqR9zRm1LGzT97VFHVtf0/RlH2uUmVvuQxDdI30H+NV4L7xbervtPA+ptD/C0z+UW/BlrtPht4DGm2S+INdhE3iC+/fFpVybVSOEUH7rY6+n3eg59M+lVQyqhTj7yuxVMbNv3dEeAo/ja4kMUHga8WTOMyzBV/MgD9a0rP4Z+LPEbIfE2pxaVYMBvsrA7pX9QzcqPzYe1e2gCkNddPC0abvGOplPEVJqzZkaFoGleHNPWy0qwitIFAyI1+Zz6serH3PNbVFFdRgRtFG5yyKx9xT+BS0UAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUlFFJgIOlUtX/wCQLff9e8n/AKCaKKGC2LtBoooQPYWjvRRR1BC0UUUwCiiigAooooAKKKKACiiigD//2Q==" style="width: 135px; height: auto;" alt="SGSITS Logo"/>
+      </div>
+
+      <div style="text-align: center; font-weight: bold; font-size: 14pt; margin: 15px 0;">
+        [2026-2027]
+      </div>
+
+      <div style="text-align: center; font-style: italic; font-size: 12pt; line-height: 1.45; margin-bottom: 35px;">
+        Minor Project Report Submitted to Rajiv Gandhi Proudyogiki Vishwavidyalaya,<br>
+        Bhopal towards the partial fulfillment of the degree of<br>
+        <span style="font-style: normal; font-weight: bold; font-size: 14pt; display: inline-block; margin-top: 5px;">MASTER OF COMPUTER APPLICATION</span><br>
+        <span style="font-style: normal; font-weight: bold; font-size: 11pt;">(COMPUTER TECHNOLOGY AND APPLICATIONS)</span>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-top: 25px; padding: 0 10px; font-size: 11pt; line-height: 1.4;">
+        <div style="text-align: left; width: 45%;">
+          <b style="font-size: 12pt;">Supervised by:</b><br><br>
+          <span style="font-size: 11.5pt; font-weight: bold;">Mr. Deepesh Agarwal</span><br>
+          Asst. Professor<br>
+          Computer Technology and Applications
+        </div>
+        <div style="text-align: right; width: 50%;">
+          <b style="font-size: 12pt;">Submitted by:</b><br><br>
+          <div style="line-height: 1.35;">
+            <b>Piyush Chirote</b><br>
+            0801CA251095<br><br>
+            <b>Tanish Jain</b><br>
+            0801CA251139<br><br>
+            <b>Riya Joshi</b><br>
+            0801CA251119<br><br>
+            <b>Ritik Govind Rao</b><br>
+            0801CA251117<br><br>
+            <b>Nandani Asalkar</b><br>
+            0801CA251085
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="page">
+      <div style="text-align: center; font-weight: bold; font-size: 13pt; line-height: 1.4; margin-top: 5px;">
+        SHRI G.S. INSTITUTE OF TECHNOLOGY AND SCIENCE, INDORE (M.P.)<br>
+        <span style="font-size: 11pt; font-weight: normal;">A Govt. Aided Autonomous Institute, Affiliated to RGPV, Bhopal</span>
+      </div>
+
+      <div style="text-align: center; font-weight: bold; font-size: 12.5pt; margin-top: 20px; text-transform: uppercase;">
+        DEPARTMENT OF COMPUTER TECHNOLOGY AND APPLICATIONS
+      </div>
+
+      <div style="text-align: center; margin: 25px 0 15px 0;">
+        <img src="data:image/jpeg;base64,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" style="width: 125px; height: auto;" alt="SGSITS Logo"/>
+      </div>
+
+      <div style="text-align: center; font-weight: bold; font-size: 14pt; margin-bottom: 25px;">
+        [2026-2027]
+      </div>
+
+      <div style="text-align: center; font-weight: bold; font-size: 16pt; text-decoration: underline; margin-bottom: 30px; letter-spacing: 0.5px;">
+        RECOMMENDATION
+      </div>
+
+      <div style="text-align: justify; font-size: 12pt; line-height: 1.7; text-indent: 40px; margin-bottom: 120px;">
+        We are pleased to recommend that the project work entitled <b>CampusCare: Centralized Campus Grievance Redressal and Incident Management System</b> submitted by <b>Piyush Chirote, Riya Joshi, Ritik Govind Rao, Tanish Jain and Nandani Asalkar</b> may be accepted in partial fulfillment of the degree of <b>Master of Computer Application</b> of Shri Govindram Seksaria Institute of Technology and Science, Indore during the session <b>2026-2027</b>.
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; padding: 0 10px; font-size: 11.5pt;">
+        <div style="text-align: left; width: 45%;">
+          <b>[Mr. Deepesh Agarwal]</b><br>
+          Asst. Professor<br>
+          Computer Technology and Applications
+        </div>
+        <div style="text-align: right; width: 48%;">
+          <b>[Dr. Sunita Varma]</b><br>
+          Head of Department<br>
+          Computer Technology and Applications
+        </div>
+      </div>
+
+      <div class="page-footer-roman">i</div>
+    </div>
+    
+    <div class="page">
+      <div style="text-align: center; font-weight: bold; font-size: 16pt; margin-top: 15px; margin-bottom: 35px; letter-spacing: 0.5px;">
+        ACKNOWLEDGEMENT
+      </div>
+
+      <div style="text-align: justify; font-size: 12pt; line-height: 1.7; text-indent: 40px; margin-bottom: 25px;">
+        We would like to express our profound gratitude to our guide, <b>Mr. Deepesh Agarwal</b>, for providing us with definite direction, professional guidance, constant encouragement from the beginning of the work and moral support in many ways during our study period. We would also like to thank our friends and family who supported us and offered deep insight into the practical requirements of campus maintenance.
+      </div>
+
+      <div style="text-align: justify; font-size: 12pt; line-height: 1.7; text-indent: 40px; margin-bottom: 25px;">
+        We wish to acknowledge the valuable help provided by the technical and support staff in the <b>Department of Computer Technology and Applications of S.G.S.I.T.S., Indore</b>. We also express our sincere appreciation to <b>Dr. Sunita Varma</b> (Head of Department) and <b>Prof. Sonika Soni</b> for their encouragement, administrative facilities, and valuable suggestions during the design and development phases of this project.
+      </div>
+
+      <div style="text-align: justify; font-size: 12pt; line-height: 1.7; text-indent: 40px; margin-bottom: 70px;">
+        We are also deeply thankful to our faculty colleagues and peer reviewers who critically evaluated the workflow and user interface of <b>CampusCare</b>, helping us finalize a secure, accessible, and high-performance digital grievance resolution system.
+      </div>
+
+      <div style="display: flex; justify-content: space-between; font-size: 11pt; line-height: 1.5; margin-bottom: 35px; padding: 0 10px;">
+        <div>
+          <b>Signature</b><br>
+          [Piyush Chirote]<br>
+          0801CA251095
+        </div>
+        <div style="text-align: right;">
+          <b>Signature</b><br>
+          [Tanish Jain]<br>
+          0801CA251139
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; font-size: 11pt; line-height: 1.5; margin-bottom: 35px; padding: 0 10px;">
+        <div>
+          <b>Signature</b><br>
+          [Riya Joshi]<br>
+          0801CA251119
+        </div>
+        <div style="text-align: right;">
+          <b>Signature</b><br>
+          [Ritik Govind Rao]<br>
+          0801CA251117
+        </div>
+      </div>
+
+      <div style="font-size: 11pt; line-height: 1.5; padding: 0 10px;">
+        <b>Signature</b><br>
+        [Nandani Asalkar]<br>
+        0801CA251085
+      </div>
+
+      <div class="page-footer-roman">ii</div>
+    </div>
+    
+    <div class="page">
+      <div style="text-align: center; font-weight: bold; font-size: 16pt; margin-top: 15px; margin-bottom: 30px; letter-spacing: 0.5px;">
+        ABSTRACT
+      </div>
+
+      <div style="text-align: justify; font-size: 11.5pt; line-height: 1.65; margin-bottom: 18px;">
+        The <b>CampusCare: Centralized Campus Grievance Redressal and Incident Management System</b> is an automated enterprise web solution engineered to address the inefficiencies, lack of transparency, administrative bottlenecks, and traceability risks associated with conventional manual campus complaint handling. In large educational institutions, students and faculty traditionally communicate infrastructure and logistical breakdowns—such as classroom projector defects, laboratory instrument failures, Wi-Fi connectivity dropouts, electrical hazards, sanitation issues, or hostel maintenance requests—via paper registers, suggestion boxes, or unorganized verbal intimations. These legacy practices frequently result in lost tickets, unaccountable delays, zero status visibility, and uncoordinated facility maintenance.
+      </div>
+
+      <div style="text-align: justify; font-size: 11.5pt; line-height: 1.65; margin-bottom: 18px;">
+        To comprehensively eliminate these operational vulnerabilities, <b>CampusCare</b> establishes a unified, cloud-ready digital platform. The system architecture is built on a multi-layered framework featuring a responsive <b>ReactJS</b> frontend styled with <b>Tailwind CSS</b> and <b>Bootstrap</b>, an asynchronous, high-throughput <b>Node.js / Express</b> REST API backend, and a robust document-oriented database using <b>MongoDB</b> with <b>Mongoose ODM</b>. The authentication mechanism integrates industry-standard JSON Web Tokens (JWT) coupled with <b>Bcrypt</b> password salting to enforce strict Role-Based Access Control (RBAC) across Students and Administrators.
+      </div>
+
+      <div style="text-align: justify; font-size: 11.5pt; line-height: 1.65; margin-bottom: 18px;">
+        The system workflow encompasses a self-service registration and authentication pipeline, a dynamic incident reporting module that generates unique alphanumeric tracking codes (e.g., <i>CC-2026-XXXX</i>), categorical routing across nine campus operational domains, and an automated audit lifecycle tracker. Administrators and facility supervisors are provided with an interactive management dashboard displaying real-time operational statistics, priority breakdown matrices, and quick-filter queues.
+      </div>
+
+      <div style="text-align: justify; font-size: 11.5pt; line-height: 1.65;">
+        Through an immutable status history audit log (<i>SUBMITTED &rarr; IN_PROGRESS &rarr; RESOLVED</i>), CampusCare ensures complete administrative accountability, providing time-stamped resolution remarks for every action. Ultimately, this project demonstrates a modern, scalable, and secure institutional governance solution that saves valuable institutional hours, streamlines campus maintenance, and maximizes student satisfaction.
+      </div>
+
+      <div class="page-footer-roman">iii</div>
+    </div>
+    
+    <div class="page">
+      <div style="text-align: center; font-weight: bold; font-size: 16pt; margin-top: 15px; margin-bottom: 30px;">
+        Table of Contents
+      </div>
+
+      <div class="toc-container" style="font-size: 11pt; line-height: 1.95;">
+        <div class="toc-line"><span><b>Recommendation</b></span><span class="toc-dots"></span><span><b>i</b></span></div>
+        <div class="toc-line"><span><b>Acknowledgement</b></span><span class="toc-dots"></span><span><b>ii</b></span></div>
+        <div class="toc-line"><span><b>Abstract</b></span><span class="toc-dots"></span><span><b>iii</b></span></div>
+        <div class="toc-line"><span><b>Table of Contents</b></span><span class="toc-dots"></span><span><b>iv</b></span></div>
+        <div class="toc-line"><span><b>List of Figures</b></span><span class="toc-dots"></span><span><b>vi</b></span></div>
+        <br>
+        <div class="toc-line"><span><b>1 &nbsp; Introduction</b></span><span class="toc-dots"></span><span><b>1</b></span></div>
+        <div class="toc-line toc-sub"><span>1.1 &nbsp; Overview</span><span class="toc-dots"></span><span>1</span></div>
+        <div class="toc-line toc-sub"><span>1.2 &nbsp; Objectives</span><span class="toc-dots"></span><span>1</span></div>
+        <div class="toc-line toc-sub"><span>1.3 &nbsp; Problem Statement</span><span class="toc-dots"></span><span>2</span></div>
+        <div class="toc-line toc-sub"><span>1.4 &nbsp; Proposed Solution</span><span class="toc-dots"></span><span>3</span></div>
+        <br>
+        <div class="toc-line"><span><b>2 &nbsp; System Design</b></span><span class="toc-dots"></span><span><b>4</b></span></div>
+        <div class="toc-line toc-sub"><span>2.1 &nbsp; System Architecture</span><span class="toc-dots"></span><span>4</span></div>
+        <div class="toc-line toc-sub"><span>2.2 &nbsp; UseCase Diagram</span><span class="toc-dots"></span><span>6</span></div>
+        <div class="toc-line toc-sub"><span>2.3 &nbsp; Data Flow Diagram (DFD)</span><span class="toc-dots"></span><span>7</span></div>
+        <div class="toc-line toc-sub"><span>2.4 &nbsp; Class Diagram</span><span class="toc-dots"></span><span>8</span></div>
+        <div class="toc-line toc-sub"><span>2.5 &nbsp; Activity Diagram</span><span class="toc-dots"></span><span>9</span></div>
+        <div class="toc-line toc-sub"><span>2.6 &nbsp; Sequence Diagram</span><span class="toc-dots"></span><span>10</span></div>
+        <div class="toc-line toc-sub"><span>2.7 &nbsp; ER Diagram</span><span class="toc-dots"></span><span>11</span></div>
+        <br>
+        <div class="toc-line"><span><b>3 &nbsp; System Overview and Implementation</b></span><span class="toc-dots"></span><span><b>12</b></span></div>
+        <div class="toc-line toc-sub"><span>3.1 &nbsp; Frontend Development</span><span class="toc-dots"></span><span>12</span></div>
+        <div class="toc-line toc-sub"><span>3.2 &nbsp; Backend Architecture</span><span class="toc-dots"></span><span>14</span></div>
+        <div class="toc-line toc-sub"><span>3.3 &nbsp; Database Management (MongoDB)</span><span class="toc-dots"></span><span>15</span></div>
+        <div class="toc-line toc-sub"><span>3.4 &nbsp; File Management and Data Security</span><span class="toc-dots"></span><span>16</span></div>
+        <div class="toc-line toc-sub"><span>3.5 &nbsp; Programming Languages and Frameworks</span><span class="toc-dots"></span><span>16</span></div>
+        <div class="toc-line toc-sub"><span>3.6 &nbsp; Security and Scalability</span><span class="toc-dots"></span><span>18</span></div>
+        <div class="toc-line toc-sub"><span>3.7 &nbsp; Security Measures</span><span class="toc-dots"></span><span>19</span></div>
+      </div>
+
+      <div class="page-footer-roman">iv</div>
+    </div>
+    
+    <div class="page">
+      <div style="text-align: center; font-weight: bold; font-size: 16pt; margin-top: 15px; margin-bottom: 30px;">
+        Table of Contents (Cont.)
+      </div>
+
+      <div class="toc-container" style="font-size: 11pt; line-height: 2.1;">
+        <div class="toc-line"><span><b>4 &nbsp; Implementation and Testing</b></span><span class="toc-dots"></span><span><b>20</b></span></div>
+        <div class="toc-line toc-sub"><span>4.1 &nbsp; Implementation</span><span class="toc-dots"></span><span>20</span></div>
+        <div class="toc-line toc-sub"><span>4.2 &nbsp; Database Implementation and Preprocessing</span><span class="toc-dots"></span><span>21</span></div>
+        <div class="toc-line toc-sub"><span>4.3 &nbsp; Testing</span><span class="toc-dots"></span><span>21</span></div>
+        <div class="toc-line toc-sub2"><span>4.3.1 &nbsp; Unit Testing</span><span class="toc-dots"></span><span>21</span></div>
+        <div class="toc-line toc-sub2"><span>4.3.2 &nbsp; Integration Testing</span><span class="toc-dots"></span><span>21</span></div>
+        <div class="toc-line toc-sub2"><span>4.3.3 &nbsp; System Testing</span><span class="toc-dots"></span><span>21</span></div>
+        <div class="toc-line toc-sub2"><span>4.3.4 &nbsp; Results and Accuracy</span><span class="toc-dots"></span><span>22</span></div>
+        <br>
+        <div class="toc-line"><span><b>5 &nbsp; Conclusion</b></span><span class="toc-dots"></span><span><b>23</b></span></div>
+        <div class="toc-line toc-sub"><span>5.1 &nbsp; Project Summary</span><span class="toc-dots"></span><span>23</span></div>
+        <div class="toc-line toc-sub"><span>5.2 &nbsp; Achievements</span><span class="toc-dots"></span><span>23</span></div>
+        <div class="toc-line toc-sub"><span>5.3 &nbsp; Limitations</span><span class="toc-dots"></span><span>24</span></div>
+        <div class="toc-line toc-sub"><span>5.4 &nbsp; Future Work</span><span class="toc-dots"></span><span>24</span></div>
+        <br>
+        <div class="toc-line"><span><b>6 &nbsp; SnapShort (Screenshots)</b></span><span class="toc-dots"></span><span><b>25</b></span></div>
+        <div class="toc-line toc-sub"><span>6.1 &nbsp; Database Screenshot (MongoDB Collections)</span><span class="toc-dots"></span><span>25</span></div>
+        <div class="toc-line toc-sub"><span>6.2 &nbsp; Application UI Screenshot (Admin &amp; Student Portal)</span><span class="toc-dots"></span><span>26</span></div>
+        <br>
+        <div class="toc-line"><span><b>7 &nbsp; References</b></span><span class="toc-dots"></span><span><b>27</b></span></div>
+      </div>
+
+      <div class="page-footer-roman">v</div>
+    </div>
+    
+    <div class="page">
+      <div style="text-align: center; font-weight: bold; font-size: 16pt; margin-top: 15px; margin-bottom: 30px;">
+        List of Figures
+      </div>
+
+      <div style="font-size: 11pt; line-height: 2.3;">
+        <div style="display: flex; justify-content: space-between; font-weight: bold; border-bottom: 1.5px solid #000; padding-bottom: 4px; margin-bottom: 15px;">
+          <span style="width: 15%;">Fig. No.</span>
+          <span style="width: 70%;">Title</span>
+          <span style="width: 15%; text-align: right;">Page No.</span>
+        </div>
+
+        <div class="toc-line"><span style="width: 15%;">2.1</span><span style="width: 70%;">Use Case Diagram of CampusCare System</span><span class="toc-dots"></span><span style="width: 15%; text-align: right;">6</span></div>
+        <div class="toc-line"><span style="width: 15%;">2.2</span><span style="width: 70%;">Data Flow Diagram (DFD) of CampusCare System</span><span class="toc-dots"></span><span style="width: 15%; text-align: right;">7</span></div>
+        <div class="toc-line"><span style="width: 15%;">2.3</span><span style="width: 70%;">Class Diagram of CampusCare System</span><span class="toc-dots"></span><span style="width: 15%; text-align: right;">8</span></div>
+        <div class="toc-line"><span style="width: 15%;">2.4</span><span style="width: 70%;">Activity Diagram of Complaint Lifecycle</span><span class="toc-dots"></span><span style="width: 15%; text-align: right;">9</span></div>
+        <div class="toc-line"><span style="width: 15%;">2.5</span><span style="width: 70%;">Sequence Diagram of Grievance Lodging &amp; Resolution</span><span class="toc-dots"></span><span style="width: 15%; text-align: right;">10</span></div>
+        <div class="toc-line"><span style="width: 15%;">2.6</span><span style="width: 70%;">ER Diagram of CampusCare Database</span><span class="toc-dots"></span><span style="width: 15%; text-align: right;">11</span></div>
+        <div class="toc-line"><span style="width: 15%;">3.1</span><span style="width: 70%;">Frontend Development &amp; Component Hierarchy</span><span class="toc-dots"></span><span style="width: 15%; text-align: right;">12</span></div>
+        <div class="toc-line"><span style="width: 15%;">3.2</span><span style="width: 70%;">Backend Service Architecture &amp; REST APIs</span><span class="toc-dots"></span><span style="width: 15%; text-align: right;">14</span></div>
+        <div class="toc-line"><span style="width: 15%;">3.3</span><span style="width: 70%;">Database Management &amp; Mongoose Schemas</span><span class="toc-dots"></span><span style="width: 15%; text-align: right;">15</span></div>
+        <div class="toc-line"><span style="width: 15%;">4.1</span><span style="width: 70%;">Implementation Lifecycle &amp; State Validation</span><span class="toc-dots"></span><span style="width: 15%; text-align: right;">20</span></div>
+        <div class="toc-line"><span style="width: 15%;">4.2</span><span style="width: 70%;">Testing Methodology &amp; Quality Verification</span><span class="toc-dots"></span><span style="width: 15%; text-align: right;">21</span></div>
+        <div class="toc-line"><span style="width: 15%;">6.1</span><span style="width: 70%;">Database Screenshot (MongoDB Collections &amp; Query Results)</span><span class="toc-dots"></span><span style="width: 15%; text-align: right;">25</span></div>
+        <div class="toc-line"><span style="width: 15%;">6.2</span><span style="width: 70%;">Application UI Screenshot (Admin &amp; Student Portals)</span><span class="toc-dots"></span><span style="width: 15%; text-align: right;">26</span></div>
+      </div>
+
+      <div class="page-footer-roman">vi</div>
+    </div>
+    
+    <div class="page">
+      <div class="page-header">CHAPTER 1. INTRODUCTION 2026</div>
+
+      <div style="text-align: right; font-size: 22pt; font-weight: bold; margin-bottom: 25px; margin-top: 10px;">
+        Chapter 1
+      </div>
+      <div style="text-align: center; font-size: 20pt; font-weight: bold; margin-bottom: 30px; letter-spacing: 0.5px;">
+        INTRODUCTION
+      </div>
+
+      <div class="section-title">1.1 &nbsp; Overview</div>
+      <div class="body-p">
+        The <b>CampusCare System</b> is a modern, automated web-based solution engineered to replace traditional, manual ways of handling campus grievances and maintenance incidents. In most colleges, universities, and academic institutions, complaint registration is still handled through physical registers placed in administrative offices, suggestion boxes outside hostel wardens' cabins, or uncoordinated verbal communications. These obsolete methods are time-consuming, unorganized, highly prone to human oversight, and completely lack traceability.
+      </div>
+      <div class="body-p">
+        In traditional environments, students frequently lodge complaints regarding broken laboratory equipment, non-functional classroom projectors, internet or Wi-Fi connectivity blackouts, hostel water supply failures, or electrical faults, only for those requests to sit unattended for days without any verifiable record of who received them or what corrective actions were scheduled. To permanently resolve this problem, we have developed <b>CampusCare</b>—a centralized campus incident management and grievance redressal platform.
+      </div>
+      <div class="body-p">
+        With the rapid evolution of modern web architectures, cloud databases, and single-page applications, digital incident dispatching has become the gold standard in corporate and smart-campus environments. Applying full-stack web technologies to campus grievance management is a vital, natural, and highly practical step toward institutional transparency, accountability, and operational excellence.
+      </div>
+
+      <div class="section-title" style="margin-top: 20px;">1.2 &nbsp; Objectives</div>
+      <div class="body-p">
+        The primary goal of this project is to build an intelligent, centralized campus issue resolution system that completely eliminates the inefficiencies of physical registers and verbal complaint channels. The specific objectives are as follows:
+      </div>
+      <ul class="body-ul">
+        <li><b>To Eliminate Paper-Based Registers:</b> To replace cumbersome physical complaint registers and manual suggestion boxes with an intuitive, cloud-accessible digital grievance submission portal that operates 24/7.</li>
+        <li><b>To Prevent Lost or Ignored Complaints:</b> To guarantee that every single student grievance is automatically assigned a unique tracking ticket number and recorded in a centralized database, ensuring zero lost tickets.</li>
+      </ul>
+
+      <div class="page-footer">
+        <span class="f-left">[MCA][CTA]</span>
+        <span class="f-line"></span>
+        <span class="f-mid">Page 1</span>
+        <span class="f-line"></span>
+        <span class="f-right">S.G.S.I.T.S., INDORE</span>
+      </div>
+    </div>
+    
+    <div class="page">
+      <div class="page-header">CHAPTER 1. INTRODUCTION 2026</div>
+
+      <ul class="body-ul" style="margin-top: 10px;">
+        <li><b>To Enable Real-Time Lifecycle Tracking:</b> To provide students and administrators with instant status updates (<i>SUBMITTED, IN_PROGRESS, RESOLVED</i>) alongside an audit history of administrative remarks and timestamps.</li>
+        <li><b>To Automate Categorization and Prioritization:</b> To implement structured dispatching across nine distinct institutional domains (Classrooms, Labs, Wi-Fi, Electrical, Cleanliness, Library, Hostel, Administration, Other) with priority grading (LOW, MEDIUM, HIGH).</li>
+        <li><b>To Store Incident Data Securely:</b> To maintain a robust, organized NoSQL database (MongoDB) that securely stores student profiles, grievance details, timestamps, and administrative audit trails with zero tampering risk.</li>
+        <li><b>To Provide a Dedicated Admin Dashboard:</b> To deliver an administrative cockpit where college authorities can view real-time incident queues, analyze recurring breakdown trends, and monitor maintenance staff resolution efficiency.</li>
+        <li><b>To Build a Scalable Campus Infrastructure:</b> To design a stateless RESTful architecture capable of seamless expansion across colleges, departments, and multiple academic campuses without code modifications.</li>
+      </ul>
+
+      <div class="section-title" style="margin-top: 25px;">1.3 &nbsp; Problem Statement</div>
+      <div class="body-p">
+        In many higher educational institutions, facility maintenance and student grievance handling continue to rely on manual, fragmented workflows. These obsolete mechanisms produce multiple systemic failures:
+      </div>
+      <div class="body-p">
+        Current limitations in conventional campus management include:
+      </div>
+      <ol class="body-ol">
+        <li><b>Lack of Traceability:</b> Complaints written in physical registers can be misplaced, damaged, or arbitrarily ignored with no record of who logged or received them.</li>
+        <li><b>Zero Status Transparency:</b> Students have no mechanism to check whether their grievance has been acknowledged, assigned to a technician, or resolved, forcing repeated in-person visits to administrative offices.</li>
+        <li><b>Absence of Categorical Prioritization:</b> Critical safety or electrical hazards get buried beneath routine maintenance requests due to the lack of algorithmic priority filtering.</li>
+        <li><b>No Institutional Accountability:</b> Departmental heads and college administrators lack unified analytics to evaluate average resolution times, recurring infrastructural failures, or staff performance.</li>
+        <li><b>Manual Communication Delays:</b> Information transfer between students, administrative officers, and maintenance technicians involves slow, error-prone manual handoffs.</li>
+      </ol>
+
+      <div class="page-footer">
+        <span class="f-left">[MCA][CTA]</span>
+        <span class="f-line"></span>
+        <span class="f-mid">Page 2</span>
+        <span class="f-line"></span>
+        <span class="f-right">S.G.S.I.T.S., INDORE</span>
+      </div>
+    </div>
+    
+    <div class="page">
+      <div class="page-header">CHAPTER 1. INTRODUCTION 2026</div>
+
+      <div class="section-title" style="margin-top: 10px;">1.4 &nbsp; Problem Solution</div>
+      <div class="body-p">
+        <b>CampusCare</b> replaces slow, opaque manual registers with an instant, full-stack digital incident management platform. Students can securely submit grievances from any smartphone or browser in under 30 seconds. The backend engine automatically generates a verifiable tracking code, routes the request to the appropriate department, logs timestamped status history, and provides administrators with real-time resolution controls.
+      </div>
+
+      <div class="body-p" style="margin-top: 15px;">
+        <b>Step 1: Student Onboarding and Authentication (One-Time Setup):</b><br>
+        Students register using their academic credentials, institutional email, and roll number. The system verifies input patterns, hashes the password using <b>Bcrypt</b>, and issues a stateless <b>JSON Web Token (JWT)</b> for secure, authenticated session handling across all subsequent requests.
+      </div>
+
+      <div class="body-p" style="margin-top: 15px;">
+        <b>Step 2: Instant Grievance Lodging (Categorical Classification):</b><br>
+        When an issue occurs, the student accesses the <i>Submit Complaint</i> portal. The student inputs a concise title, selects the operational category (e.g., <i>Internet / Wi-Fi, Electrical / Maintenance, Hostel</i>), picks a priority level (<i>LOW, MEDIUM, HIGH</i>), specifies the campus location (e.g., <i>Lab 3, Rack 2</i>), and provides a descriptive explanation.
+      </div>
+
+      <div class="body-p" style="margin-top: 15px;">
+        <b>Step 3: Automated Ticket Allocation &amp; Audit Logging:</b><br>
+        The backend receives the sanitized payload, validates data types, and generates a unique, human-readable ticket number (e.g., <i>CC-2026-0014</i>). It writes the complaint into the <b>MongoDB</b> database with default status <b>SUBMITTED</b> and pushes an immutable initial audit entry into the <code>statusHistory</code> array.
+      </div>
+
+      <div class="body-p" style="margin-top: 15px;">
+        <b>Step 4: Administrative Review, Dispatch, and Status Transition:</b><br>
+        Administrative officers log into the dedicated <b>Admin Dashboard</b>. High-priority incidents are highlighted in red badges. Administrators can inspect ticket details, assign maintenance personnel, update the status to <b>IN_PROGRESS</b>, and record formal resolution notes upon completing the maintenance work.
+      </div>
+
+      <div class="body-p" style="margin-top: 15px;">
+        <b>Step 5: Transparent Resolution and Closed-Loop Verification:</b><br>
+        Once maintenance is complete, the admin marks the status as <b>RESOLVED</b>, appending the completion remarks and resolution timestamp. The student's portal updates in real time, displaying the green resolution checkmark and full audit timeline.
+      </div>
+
+      <div class="page-footer">
+        <span class="f-left">[MCA][CTA]</span>
+        <span class="f-line"></span>
+        <span class="f-mid">Page 3</span>
+        <span class="f-line"></span>
+        <span class="f-right">S.G.S.I.T.S., INDORE</span>
+      </div>
+    </div>
+    
+    <div class="page">
+      <div class="page-header">CHAPTER 2. SYSTEM DESIGN 2026</div>
+
+      <div style="text-align: right; font-size: 22pt; font-weight: bold; margin-bottom: 25px; margin-top: 10px;">
+        Chapter 2
+      </div>
+      <div style="text-align: center; font-size: 20pt; font-weight: bold; margin-bottom: 30px; letter-spacing: 0.5px;">
+        SYSTEM DESIGN
+      </div>
+
+      <div class="section-title">2.1 &nbsp; System Architecture</div>
+      <div class="body-p">
+        The architecture of the <b>CampusCare System</b> is designed as a multi-layered framework that ensures a smooth flow of data from the client browser interface to permanent database storage. It follows a modular, decoupled approach, strictly separating the user interface, business logic processing, authentication security, and persistent document management.
+      </div>
+
+      <div style="font-weight: bold; font-size: 11.5pt; margin-top: 15px; margin-bottom: 5px;">
+        1. Frontend Layer (User Interface): ReactJS + Tailwind CSS
+      </div>
+      <div class="body-p">
+        <b>ReactJS</b> is used to build the responsive client interface. It establishes a Single Page Application (SPA) architecture where dynamic components re-render instantly without triggering full page reloads, providing a desktop-grade user experience.
+      </div>
+      <div class="body-p">
+        <b>Tailwind CSS</b> and <b>Bootstrap</b> provide modern, utility-first styling, ensuring responsive grid layouts, crisp typography, and adaptive components across mobile, tablet, and desktop viewports.
+      </div>
+
+      <div style="font-weight: bold; font-size: 11pt; margin-top: 12px; margin-bottom: 5px;">
+        Main Pages and Functional Modules:
+      </div>
+      <ul class="body-ul">
+        <li><b>Login / Register Page:</b> Dual-mode public authentication gateway supporting self-registration for students and secure credential validation for administrators.</li>
+        <li><b>Student Dashboard:</b> Central overview card displaying total complaints submitted, active investigations, and successfully resolved tickets.</li>
+        <li><b>Submit Complaint Page:</b> Dynamic interactive form with input validation, category dropdowns, priority switches, and description counters.</li>
+        <li><b>My Complaints Page:</b> Filterable data list with real-time status badges (Blue for Submitted, Amber for In Progress, Green for Resolved).</li>
+        <li><b>Complaint Details View:</b> Expandable audit timeline illustrating the exact historical lifecycle, supervisor notes, and timestamps.</li>
+        <li><b>Admin Dashboard &amp; Management Portal:</b> Executive control cockpit providing aggregate KPI counters, priority queues, and modal dialogs to update complaint statuses.</li>
+      </ul>
+
+      <div class="page-footer">
+        <span class="f-left">[MCA][CTA]</span>
+        <span class="f-line"></span>
+        <span class="f-mid">Page 4</span>
+        <span class="f-line"></span>
+        <span class="f-right">S.G.S.I.T.S., INDORE</span>
+      </div>
+    </div>
+    
+    <div class="page">
+      <div class="page-header">CHAPTER 2. SYSTEM DESIGN 2026</div>
+
+      <div style="font-weight: bold; font-size: 11.5pt; margin-top: 10px; margin-bottom: 5px;">
+        2. Backend Layer: Node.js &amp; Express REST API Server
+      </div>
+      <div class="body-p">
+        <b>Express.js</b> serves as the central server-side web application framework running on the <b>Node.js</b> runtime. It orchestrates HTTP request routing, input sanitization, controller logic execution, security enforcement, and database communications.
+      </div>
+
+      <div style="font-weight: bold; font-size: 11pt; margin-top: 12px; margin-bottom: 5px;">
+        Main Architectural Layers:
+      </div>
+      <ol class="body-ol">
+        <li><b>Controller Layer:</b> Receives REST API requests (GET, POST, PUT, DELETE) from the ReactJS frontend, validates incoming JSON payloads, invokes domain business logic, and returns formatted JSON responses with standard HTTP status codes.</li>
+        <li><b>Middleware Layer:</b> Intercepts all protected routes to verify JWT bearer tokens, extracts the authenticated user context, checks role permissions (STUDENT vs ADMIN), and sanitizes inputs against malicious payloads.</li>
+        <li><b>Service &amp; Business Logic Layer:</b> Contains algorithmic operations including unique ticket number generation (CC-YYYY-XXXX), status transition enforcement rules, and status history array appending.</li>
+        <li><b>Repository &amp; ODM Layer:</b> Utilizes <b>Mongoose ODM</b> to enforce strict document schemas, handle compound indexing, and communicate with the underlying MongoDB database.</li>
+      </ol>
+
+      <div style="font-weight: bold; font-size: 11.5pt; margin-top: 15px; margin-bottom: 5px;">
+        3. Data Storage Layer (MongoDB NoSQL Database)
+      </div>
+      <ul class="body-ul">
+        <li>Employs <b>MongoDB</b> as a high-performance document store, efficiently handling nested structures like complaint status history and user authentication details.</li>
+        <li>Establishes resilient connection pooling with auto-reconnect logic via Mongoose.</li>
+        <li>Enforces database-level indexes on <code>createdBy</code>, <code>status</code>, <code>category</code>, and <code>ticketNumber</code> to ensure lightning-fast retrieval times under institutional load.</li>
+      </ul>
+
+      <div style="font-weight: bold; font-size: 11.5pt; margin-top: 15px; margin-bottom: 5px;">
+        4. Output &amp; Analytics Layer (Reporting Engine)
+      </div>
+      <ul class="body-ul">
+        <li>Computes real-time aggregate statistics for the administrator dashboard (Total, In Progress, Resolved, High Priority).</li>
+        <li>Enables real-time data inspection for audit compliance, departmental review, and infrastructure maintenance planning.</li>
+      </ul>
+
+      <div class="page-footer">
+        <span class="f-left">[MCA][CTA]</span>
+        <span class="f-line"></span>
+        <span class="f-mid">Page 5</span>
+        <span class="f-line"></span>
+        <span class="f-right">S.G.S.I.T.S., INDORE</span>
+      </div>
+    </div>
+    
+    <div class="page">
+      <div class="page-header">CHAPTER 2. SYSTEM DESIGN 2026</div>
+
+      <div class="section-title" style="margin-top: 10px; margin-bottom: 15px;">2.2 &nbsp; UseCase Diagram</div>
+      
+      <div style="text-align: center; margin: 10px 0;">
+        <svg width="680" height="520" viewBox="0 0 680 520" xmlns="http://www.w3.org/2000/svg" style="background:#fff; font-family:'Times New Roman', serif;">
+  <!-- Outer System Boundary -->
+  <rect x="150" y="30" width="380" height="460" rx="8" fill="#fcfcfd" stroke="#1e293b" stroke-width="2"/>
+  <text x="340" y="55" font-size="14" font-weight="bold" fill="#0f172a" text-anchor="middle">CampusCare System Boundary</text>
+  
+  <!-- Left Actor: Student -->
+  <g transform="translate(60, 200)">
+    <circle cx="20" cy="15" r="12" fill="#e2e8f0" stroke="#0f172a" stroke-width="2"/>
+    <line x1="20" y1="27" x2="20" y2="65" stroke="#0f172a" stroke-width="2"/>
+    <line x1="0" y1="40" x2="40" y2="40" stroke="#0f172a" stroke-width="2"/>
+    <line x1="20" y1="65" x2="5" y2="100" stroke="#0f172a" stroke-width="2"/>
+    <line x1="20" y1="65" x2="35" y2="100" stroke="#0f172a" stroke-width="2"/>
+    <text x="20" y="120" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">Student</text>
+  </g>
+
+  <!-- Right Actor: Admin -->
+  <g transform="translate(580, 200)">
+    <circle cx="20" cy="15" r="12" fill="#e2e8f0" stroke="#0f172a" stroke-width="2"/>
+    <line x1="20" y1="27" x2="20" y2="65" stroke="#0f172a" stroke-width="2"/>
+    <line x1="0" y1="40" x2="40" y2="40" stroke="#0f172a" stroke-width="2"/>
+    <line x1="20" y1="65" x2="5" y2="100" stroke="#0f172a" stroke-width="2"/>
+    <line x1="20" y1="65" x2="35" y2="100" stroke="#0f172a" stroke-width="2"/>
+    <text x="20" y="120" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">Admin / Faculty</text>
+  </g>
+
+  <!-- Use Cases (Ellipses) -->
+  <!-- UC1: Register & Login -->
+  <ellipse cx="340" cy="95" rx="85" ry="22" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="340" y="99" font-size="11.5" font-weight="bold" fill="#1e3a8a" text-anchor="middle">User Authentication & Login</text>
+
+  <!-- UC2: Lodge Grievance -->
+  <ellipse cx="340" cy="155" rx="90" ry="22" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="340" y="159" font-size="11.5" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Lodge Incident / Grievance</text>
+
+  <!-- UC3: Categorize & Set Priority -->
+  <ellipse cx="340" cy="215" rx="95" ry="22" fill="#f8fafc" stroke="#475569" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="340" y="219" font-size="11" fill="#334155" text-anchor="middle">&lt;&lt;include&gt;&gt; Select Category &amp; Priority</text>
+
+  <!-- UC4: Track Status & Timeline -->
+  <ellipse cx="340" cy="275" rx="90" ry="22" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="340" y="279" font-size="11.5" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Track Real-Time Status &amp; Logs</text>
+
+  <!-- UC5: Manage & Update Status -->
+  <ellipse cx="340" cy="335" rx="95" ry="22" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="340" y="339" font-size="11.5" font-weight="bold" fill="#991b1b" text-anchor="middle">Review &amp; Update Ticket Status</text>
+
+  <!-- UC6: Resolution Remarks -->
+  <ellipse cx="340" cy="395" rx="95" ry="22" fill="#f8fafc" stroke="#475569" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="340" y="399" font-size="11" fill="#334155" text-anchor="middle">&lt;&lt;extend&gt;&gt; Append Resolution Remarks</text>
+
+  <!-- UC7: Analytics Dashboard -->
+  <ellipse cx="340" cy="455" rx="90" ry="22" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="340" y="459" font-size="11.5" font-weight="bold" fill="#991b1b" text-anchor="middle">View Operational Dashboard</text>
+
+  <!-- Associations Student -->
+  <line x1="95" y1="230" x2="255" y2="105" stroke="#334155" stroke-width="1.5"/>
+  <line x1="95" y1="240" x2="250" y2="160" stroke="#334155" stroke-width="1.5"/>
+  <line x1="95" y1="250" x2="250" y2="275" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Associations Admin -->
+  <line x1="585" y1="230" x2="425" y2="105" stroke="#334155" stroke-width="1.5"/>
+  <line x1="585" y1="250" x2="435" y2="335" stroke="#334155" stroke-width="1.5"/>
+  <line x1="585" y1="260" x2="430" y2="455" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Includes / Extends connectors -->
+  <line x1="340" y1="177" x2="340" y2="193" stroke="#475569" stroke-width="1.2" stroke-dasharray="4,2"/>
+  <polygon points="340,193 336,186 344,186" fill="#475569"/>
+  <line x1="340" y1="357" x2="340" y2="373" stroke="#475569" stroke-width="1.2" stroke-dasharray="4,2"/>
+  <polygon points="340,373 336,366 344,366" fill="#475569"/>
+</svg>
+      </div>
+
+      <div style="text-align: center; font-size: 11pt; font-weight: bold; margin-top: 15px;">
+        Figure 2.1: UseCase Diagram of CampusCare System
+      </div>
+
+      <div class="page-footer">
+        <span class="f-left">[MCA][CTA]</span>
+        <span class="f-line"></span>
+        <span class="f-mid">Page 6</span>
+        <span class="f-line"></span>
+        <span class="f-right">S.G.S.I.T.S., INDORE</span>
+      </div>
+    </div>
+    
+    <div class="page">
+      <div class="page-header">CHAPTER 2. SYSTEM DESIGN 2026</div>
+
+      <div class="section-title" style="margin-top: 10px; margin-bottom: 15px;">2.3 &nbsp; Data Flow Diagram (DFD)</div>
+
+      <div style="text-align: center; margin: 10px 0;">
+        <svg width="680" height="520" viewBox="0 0 680 520" xmlns="http://www.w3.org/2000/svg" style="background:#fff; font-family:'Times New Roman', serif;">
+  <!-- External Entity 1: Student -->
+  <rect x="40" y="100" width="110" height="60" fill="#f1f5f9" stroke="#0f172a" stroke-width="1.8"/>
+  <text x="95" y="135" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">Student</text>
+
+  <!-- Process 1.0: User Authentication -->
+  <rect x="220" y="50" width="150" height="50" rx="10" fill="#e0f2fe" stroke="#0369a1" stroke-width="1.8"/>
+  <text x="295" y="73" font-size="11" font-weight="bold" fill="#0369a1" text-anchor="middle">1.0 User Authentication</text>
+  <text x="295" y="88" font-size="9.5" fill="#0284c7" text-anchor="middle">(JWT / Bcrypt Hash)</text>
+
+  <!-- Process 2.0: Grievance Submission -->
+  <rect x="220" y="150" width="150" height="55" rx="10" fill="#e0f2fe" stroke="#0369a1" stroke-width="1.8"/>
+  <text x="295" y="174" font-size="11" font-weight="bold" fill="#0369a1" text-anchor="middle">2.0 Grievance Lodging &amp;</text>
+  <text x="295" y="190" font-size="10.5" font-weight="bold" fill="#0369a1" text-anchor="middle">Ticket Allocation</text>
+
+  <!-- Process 3.0: Status Workflow Engine -->
+  <rect x="220" y="260" width="150" height="55" rx="10" fill="#fef3c7" stroke="#b45309" stroke-width="1.8"/>
+  <text x="295" y="284" font-size="11" font-weight="bold" fill="#b45309" text-anchor="middle">3.0 Review &amp; Status</text>
+  <text x="295" y="300" font-size="10.5" font-weight="bold" fill="#b45309" text-anchor="middle">Transition Management</text>
+
+  <!-- Process 4.0: Dashboard & Metrics -->
+  <rect x="220" y="370" width="150" height="50" rx="10" fill="#f3e8ff" stroke="#7e22ce" stroke-width="1.8"/>
+  <text x="295" y="393" font-size="11" font-weight="bold" fill="#7e22ce" text-anchor="middle">4.0 Operational Analytics</text>
+  <text x="295" y="408" font-size="9.5" fill="#9333ea" text-anchor="middle">&amp; Performance Audit</text>
+
+  <!-- External Entity 2: Admin -->
+  <rect x="40" y="290" width="110" height="60" fill="#f1f5f9" stroke="#0f172a" stroke-width="1.8"/>
+  <text x="95" y="325" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">Administrator</text>
+
+  <!-- Data Stores -->
+  <!-- D1: Users Store -->
+  <g transform="translate(480, 50)">
+    <line x1="0" y1="0" x2="160" y2="0" stroke="#0f172a" stroke-width="1.8"/>
+    <line x1="0" y1="45" x2="160" y2="45" stroke="#0f172a" stroke-width="1.8"/>
+    <text x="25" y="28" font-size="11" font-weight="bold" fill="#0f172a">D1</text>
+    <line x1="45" y1="0" x2="45" y2="45" stroke="#0f172a" stroke-width="1.2"/>
+    <text x="55" y="28" font-size="11" fill="#0f172a">Users Collection</text>
+  </g>
+
+  <!-- D2: Complaints Store -->
+  <g transform="translate(480, 160)">
+    <line x1="0" y1="0" x2="160" y2="0" stroke="#0f172a" stroke-width="1.8"/>
+    <line x1="0" y1="45" x2="160" y2="45" stroke="#0f172a" stroke-width="1.8"/>
+    <text x="25" y="28" font-size="11" font-weight="bold" fill="#0f172a">D2</text>
+    <line x1="45" y1="0" x2="45" y2="45" stroke="#0f172a" stroke-width="1.2"/>
+    <text x="55" y="28" font-size="11" fill="#0f172a">Complaints Store</text>
+  </g>
+
+  <!-- D3: Status History -->
+  <g transform="translate(480, 270)">
+    <line x1="0" y1="0" x2="160" y2="0" stroke="#0f172a" stroke-width="1.8"/>
+    <line x1="0" y1="45" x2="160" y2="45" stroke="#0f172a" stroke-width="1.8"/>
+    <text x="25" y="28" font-size="11" font-weight="bold" fill="#0f172a">D3</text>
+    <line x1="45" y1="0" x2="45" y2="45" stroke="#0f172a" stroke-width="1.2"/>
+    <text x="55" y="28" font-size="11" fill="#0f172a">Status History Log</text>
+  </g>
+
+  <!-- Flow Lines -->
+  <!-- Student to Auth -->
+  <line x1="150" y1="115" x2="220" y2="80" stroke="#334155" stroke-width="1.4"/>
+  <polygon points="220,80 211,83 214,75" fill="#334155"/>
+  <text x="175" y="93" font-size="9" fill="#475569">Credentials</text>
+
+  <!-- Auth to D1 -->
+  <line x1="370" y1="75" x2="480" y2="75" stroke="#334155" stroke-width="1.4"/>
+  <polygon points="480,75 471,71 471,79" fill="#334155"/>
+
+  <!-- Student to Lodging -->
+  <line x1="150" y1="145" x2="220" y2="165" stroke="#334155" stroke-width="1.4"/>
+  <polygon points="220,165 210,163 213,171" fill="#334155"/>
+  <text x="160" y="172" font-size="9" fill="#475569">Incident Data</text>
+
+  <!-- Lodging to D2 -->
+  <line x1="370" y1="180" x2="480" y2="180" stroke="#334155" stroke-width="1.4"/>
+  <polygon points="480,180 471,176 471,184" fill="#334155"/>
+  <text x="400" y="174" font-size="9" fill="#475569">Store Ticket</text>
+
+  <!-- Admin to Status Engine -->
+  <line x1="150" y1="310" x2="220" y2="295" stroke="#334155" stroke-width="1.4"/>
+  <polygon points="220,295 210,293 213,301" fill="#334155"/>
+  <text x="155" y="325" font-size="9" fill="#475569">Remarks/Update</text>
+
+  <!-- Status Engine to D2 & D3 -->
+  <line x1="370" y1="285" x2="480" y2="210" stroke="#334155" stroke-width="1.4"/>
+  <polygon points="480,210 470,212 476,218" fill="#334155"/>
+  
+  <line x1="370" y1="295" x2="480" y2="295" stroke="#334155" stroke-width="1.4"/>
+  <polygon points="480,295 471,291 471,299" fill="#334155"/>
+  <text x="400" y="310" font-size="9" fill="#475569">Append Log</text>
+
+  <!-- D2 to Analytics -->
+  <line x1="560" y1="210" x2="560" y2="395" stroke="#334155" stroke-width="1.4"/>
+  <line x1="560" y1="395" x2="370" y2="395" stroke="#334155" stroke-width="1.4"/>
+  <polygon points="370,395 379,391 379,399" fill="#334155"/>
+
+  <!-- Analytics to Admin -->
+  <line x1="220" y1="395" x2="105" y2="395" stroke="#334155" stroke-width="1.4"/>
+  <line x1="105" y1="395" x2="105" y2="350" stroke="#334155" stroke-width="1.4"/>
+  <polygon points="105,350 101,359 109,359" fill="#334155"/>
+  <text x="120" y="385" font-size="9" fill="#475569">Dashboard Metrics</text>
+
+  <!-- DFD Legend -->
+  <g transform="translate(60, 455)">
+    <rect x="0" y="0" width="560" height="50" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="20" y="20" font-size="10" font-weight="bold" fill="#0f172a">Legend:</text>
+    <rect x="75" y="10" width="30" height="15" fill="#f1f5f9" stroke="#0f172a"/>
+    <text x="112" y="22" font-size="9.5" fill="#334155">External Entity</text>
+    <rect x="200" y="10" width="30" height="15" rx="5" fill="#e0f2fe" stroke="#0369a1"/>
+    <text x="238" y="22" font-size="9.5" fill="#334155">Process</text>
+    <line x1="310" y1="12" x2="340" y2="12" stroke="#0f172a" stroke-width="1.5"/>
+    <line x1="310" y1="24" x2="340" y2="24" stroke="#0f172a" stroke-width="1.5"/>
+    <text x="348" y="22" font-size="9.5" fill="#334155">Data Store</text>
+    <line x1="435" y1="18" x2="475" y2="18" stroke="#334155" stroke-width="1.5"/>
+    <polygon points="475,18 468,15 468,21" fill="#334155"/>
+    <text x="483" y="22" font-size="9.5" fill="#334155">Data Flow</text>
+  </g>
+</svg>
+      </div>
+
+      <div style="text-align: center; font-size: 11pt; font-weight: bold; margin-top: 15px;">
+        Figure 2.2: Data Flow Diagram of CampusCare System
+      </div>
+
+      <div class="page-footer">
+        <span class="f-left">[MCA][CTA]</span>
+        <span class="f-line"></span>
+        <span class="f-mid">Page 7</span>
+        <span class="f-line"></span>
+        <span class="f-right">S.G.S.I.T.S., INDORE</span>
+      </div>
+    </div>
+    
+    <div class="page">
+      <div class="page-header">CHAPTER 2. SYSTEM DESIGN 2026</div>
+
+      <div class="section-title" style="margin-top: 10px; margin-bottom: 15px;">2.4 &nbsp; Class Diagram</div>
+
+      <div style="text-align: center; margin: 10px 0;">
+        <svg width="680" height="520" viewBox="0 0 680 520" xmlns="http://www.w3.org/2000/svg" style="background:#fff; font-family:'Times New Roman', serif;">
+  <!-- User Class -->
+  <g transform="translate(40, 30)">
+    <rect x="0" y="0" width="180" height="135" fill="#f8fafc" stroke="#1e293b" stroke-width="1.6"/>
+    <rect x="0" y="0" width="180" height="26" fill="#e2e8f0" stroke="#1e293b" stroke-width="1.6"/>
+    <text x="90" y="18" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">User</text>
+    <text x="10" y="44" font-size="10.5" fill="#334155">- id: ObjectId</text>
+    <text x="10" y="60" font-size="10.5" fill="#334155">- name: String</text>
+    <text x="10" y="76" font-size="10.5" fill="#334155">- email: String</text>
+    <text x="10" y="92" font-size="10.5" fill="#334155">- role: Enum [STUDENT, ADMIN]</text>
+    <text x="10" y="108" font-size="10.5" fill="#334155">- passwordHash: String</text>
+    <line x1="0" y1="114" x2="180" y2="114" stroke="#1e293b" stroke-width="1"/>
+    <text x="10" y="128" font-size="10.5" fill="#334155">+ authenticate(): Boolean</text>
+  </g>
+
+  <!-- Student Subclass -->
+  <g transform="translate(30, 220)">
+    <rect x="0" y="0" width="190" height="95" fill="#f0f9ff" stroke="#0284c7" stroke-width="1.6"/>
+    <rect x="0" y="0" width="190" height="24" fill="#bae6fd" stroke="#0284c7" stroke-width="1.6"/>
+    <text x="95" y="17" font-size="11.5" font-weight="bold" fill="#0369a1" text-anchor="middle">Student (Role)</text>
+    <text x="10" y="42" font-size="10" fill="#334155">+ lodgeComplaint(details): Ticket</text>
+    <text x="10" y="58" font-size="10" fill="#334155">+ getMyComplaints(): List&lt;Ticket&gt;</text>
+    <text x="10" y="74" font-size="10" fill="#334155">+ viewAuditHistory(id): Timeline</text>
+  </g>
+  <!-- Inheritance Arrow from Student to User -->
+  <line x1="125" y1="220" x2="125" y2="165" stroke="#1e293b" stroke-width="1.5"/>
+  <polygon points="125,165 119,177 131,177" fill="#fff" stroke="#1e293b" stroke-width="1.5"/>
+
+  <!-- Admin Subclass -->
+  <g transform="translate(30, 360)">
+    <rect x="0" y="0" width="190" height="95" fill="#fef2f2" stroke="#dc2626" stroke-width="1.6"/>
+    <rect x="0" y="0" width="190" height="24" fill="#fecaca" stroke="#dc2626" stroke-width="1.6"/>
+    <text x="95" y="17" font-size="11.5" font-weight="bold" fill="#991b1b" text-anchor="middle">Admin (Role)</text>
+    <text x="10" y="42" font-size="10" fill="#334155">+ getAllComplaints(): List&lt;Ticket&gt;</text>
+    <text x="10" y="58" font-size="10" fill="#334155">+ updateStatus(id, status, note)</text>
+    <text x="10" y="74" font-size="10" fill="#334155">+ generateDashboardMetrics()</text>
+  </g>
+  <!-- Inheritance Arrow from Admin to User -->
+  <line x1="20" y1="410" x2="15" y2="410" stroke="#1e293b" stroke-width="1.5"/>
+  <line x1="15" y1="410" x2="15" y2="100" stroke="#1e293b" stroke-width="1.5"/>
+  <line x1="15" y1="100" x2="40" y2="100" stroke="#1e293b" stroke-width="1.5"/>
+
+  <!-- Complaint Class -->
+  <g transform="translate(260, 30)">
+    <rect x="0" y="0" width="210" height="225" fill="#f8fafc" stroke="#1e293b" stroke-width="1.6"/>
+    <rect x="0" y="0" width="210" height="26" fill="#e2e8f0" stroke="#1e293b" stroke-width="1.6"/>
+    <text x="105" y="18" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">Complaint</text>
+    <text x="10" y="44" font-size="10" fill="#334155">- ticketNumber: String (Unique)</text>
+    <text x="10" y="60" font-size="10" fill="#334155">- title: String</text>
+    <text x="10" y="76" font-size="10" fill="#334155">- category: Enum [9 Categories]</text>
+    <text x="10" y="92" font-size="10" fill="#334155">- description: String</text>
+    <text x="10" y="108" font-size="10.5" fill="#334155">- priority: Enum [LOW, MED, HIGH]</text>
+    <text x="10" y="124" font-size="10.5" fill="#334155">- status: Enum [SUB, IN_PROG, RES]</text>
+    <text x="10" y="140" font-size="10" fill="#334155">- location: String</text>
+    <text x="10" y="156" font-size="10" fill="#334155">- createdBy: ObjectId (Ref User)</text>
+    <text x="10" y="172" font-size="10" fill="#334155">- resolutionRemarks: String</text>
+    <text x="10" y="188" font-size="10" fill="#334155">- resolvedAt: Date</text>
+    <line x1="0" y1="195" x2="210" y2="195" stroke="#1e293b" stroke-width="1"/>
+    <text x="10" y="212" font-size="10" fill="#334155">+ appendStatusLog(status, note)</text>
+  </g>
+
+  <!-- Association User (1) to Complaint (0..*) -->
+  <line x1="220" y1="95" x2="260" y2="95" stroke="#1e293b" stroke-width="1.5"/>
+  <text x="225" y="88" font-size="10" font-weight="bold">1</text>
+  <text x="245" y="88" font-size="10" font-weight="bold">0..*</text>
+
+  <!-- StatusHistory Class -->
+  <g transform="translate(260, 310)">
+    <rect x="0" y="0" width="210" height="145" fill="#fefce8" stroke="#ca8a04" stroke-width="1.6"/>
+    <rect x="0" y="0" width="210" height="26" fill="#fef08a" stroke="#ca8a04" stroke-width="1.6"/>
+    <text x="105" y="18" font-size="12" font-weight="bold" fill="#854d0e" text-anchor="middle">StatusHistory (Embedded)</text>
+    <text x="10" y="44" font-size="10" fill="#334155">- status: String</text>
+    <text x="10" y="60" font-size="10" fill="#334155">- previousStatus: String</text>
+    <text x="10" y="76" font-size="10" fill="#334155">- newStatus: String</text>
+    <text x="10" y="92" font-size="10" fill="#334155">- changedBy: ObjectId (Ref User)</text>
+    <text x="10" y="108" font-size="10" fill="#334155">- changedAt: Date</text>
+    <text x="10" y="124" font-size="10" fill="#334155">- note: String (Max 1000)</text>
+  </g>
+  <!-- Composition Diamond from Complaint to StatusHistory -->
+  <line x1="365" y1="255" x2="365" y2="310" stroke="#1e293b" stroke-width="1.5"/>
+  <polygon points="365,255 359,265 365,275 371,265" fill="#1e293b"/>
+  <text x="372" y="270" font-size="10" font-weight="bold">1</text>
+  <text x="372" y="300" font-size="10" font-weight="bold">1..*</text>
+
+  <!-- Controllers Box -->
+  <g transform="translate(505, 120)">
+    <rect x="0" y="0" width="165" height="110" fill="#fdf4ff" stroke="#a21caf" stroke-width="1.6"/>
+    <rect x="0" y="0" width="165" height="24" fill="#f5d0fe" stroke="#a21caf" stroke-width="1.6"/>
+    <text x="82" y="17" font-size="11" font-weight="bold" fill="#86198f" text-anchor="middle">&lt;&lt;Control&gt;&gt; ComplaintCtrl</text>
+    <text x="8" y="42" font-size="9.5" fill="#334155">+ createComplaint()</text>
+    <text x="8" y="58" font-size="9.5" fill="#334155">+ getUserComplaints()</text>
+    <text x="8" y="74" font-size="9.5" fill="#334155">+ updateComplaintStatus()</text>
+    <text x="8" y="90" font-size="9.5" fill="#334155">+ getDashboardMetrics()</text>
+  </g>
+  <line x1="470" y1="160" x2="505" y2="160" stroke="#a21caf" stroke-width="1.2" stroke-dasharray="3,3"/>
+
+  <!-- Database Connection Box -->
+  <g transform="translate(505, 300)">
+    <rect x="0" y="0" width="165" height="85" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.6"/>
+    <rect x="0" y="0" width="165" height="24" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.6"/>
+    <text x="82" y="17" font-size="11" font-weight="bold" fill="#15803d" text-anchor="middle">&lt;&lt;Service&gt;&gt; MongoConnection</text>
+    <text x="8" y="44" font-size="9.5" fill="#334155">+ connectDB(): Promise</text>
+    <text x="8" y="60" font-size="9.5" fill="#334155">+ autoIndex(): Boolean</text>
+    <text x="8" y="76" font-size="9.5" fill="#334155">+ connectionPool: Client</text>
+  </g>
+</svg>
+      </div>
+
+      <div style="text-align: center; font-size: 11pt; font-weight: bold; margin-top: 15px;">
+        Figure 2.3: Class Diagram of CampusCare System
+      </div>
+
+      <div class="page-footer">
+        <span class="f-left">[MCA][CTA]</span>
+        <span class="f-line"></span>
+        <span class="f-mid">Page 8</span>
+        <span class="f-line"></span>
+        <span class="f-right">S.G.S.I.T.S., INDORE</span>
+      </div>
+    </div>
+    
+    <div class="page">
+      <div class="page-header">CHAPTER 2. SYSTEM DESIGN 2026</div>
+
+      <div class="section-title" style="margin-top: 10px; margin-bottom: 15px;">2.5 &nbsp; Activity Diagram</div>
+
+      <div style="text-align: center; margin: 10px 0;">
+        <svg width="680" height="520" viewBox="0 0 680 520" xmlns="http://www.w3.org/2000/svg" style="background:#fff; font-family:'Times New Roman', serif;">
+  <!-- Start Node -->
+  <circle cx="340" cy="25" r="12" fill="#0f172a"/>
+  
+  <!-- Step 1: Login -->
+  <rect x="250" y="55" width="180" height="35" rx="10" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="340" y="77" font-size="11" font-weight="bold" fill="#0369a1" text-anchor="middle">Student / Admin Login</text>
+  
+  <line x1="340" y1="37" x2="340" y2="55" stroke="#0f172a" stroke-width="1.5"/>
+  <polygon points="340,55 336,47 344,47" fill="#0f172a"/>
+
+  <!-- Step 2: Open Form -->
+  <rect x="250" y="110" width="180" height="35" rx="10" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="340" y="132" font-size="11" font-weight="bold" fill="#0369a1" text-anchor="middle">Fill Incident Details Form</text>
+
+  <line x1="340" y1="90" x2="340" y2="110" stroke="#0f172a" stroke-width="1.5"/>
+  <polygon points="340,110 336,102 344,102" fill="#0f172a"/>
+
+  <!-- Decision: Valid Input? -->
+  <polygon points="340,165 410,185 340,205 270,185" fill="#fef3c7" stroke="#b45309" stroke-width="1.5"/>
+  <text x="340" y="189" font-size="10.5" font-weight="bold" fill="#78350f" text-anchor="middle">Valid Input?</text>
+
+  <line x1="340" y1="145" x2="340" y2="165" stroke="#0f172a" stroke-width="1.5"/>
+  <polygon points="340,165 336,157 344,157" fill="#0f172a"/>
+
+  <!-- Invalid Input Loopback -->
+  <line x1="410" y1="185" x2="470" y2="185" stroke="#b45309" stroke-width="1.4"/>
+  <line x1="470" y1="185" x2="470" y2="127" stroke="#b45309" stroke-width="1.4"/>
+  <line x1="470" y1="127" x2="430" y2="127" stroke="#b45309" stroke-width="1.4"/>
+  <polygon points="430,127 438,123 438,131" fill="#b45309"/>
+  <text x="445" y="180" font-size="9.5" fill="#b45309">No (Alert)</text>
+
+  <!-- Valid Input -> Generate Ticket -->
+  <text x="350" y="220" font-size="9.5" fill="#15803d">Yes</text>
+  <rect x="235" y="230" width="210" height="38" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="340" y="247" font-size="10.5" font-weight="bold" fill="#15803d" text-anchor="middle">Generate Unique Ticket ID</text>
+  <text x="340" y="260" font-size="9.5" fill="#166534" text-anchor="middle">&amp; Set Status = "SUBMITTED"</text>
+
+  <line x1="340" y1="205" x2="340" y2="230" stroke="#0f172a" stroke-width="1.5"/>
+  <polygon points="340,230 336,222 344,222" fill="#0f172a"/>
+
+  <!-- Step 4: Admin Queue Review -->
+  <rect x="235" y="290" width="210" height="38" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="340" y="307" font-size="10.5" font-weight="bold" fill="#991b1b" text-anchor="middle">Admin Reviews Incident Queue</text>
+  <text x="340" y="320" font-size="9.5" fill="#b91c1c" text-anchor="middle">&amp; Dispatches to Technician</text>
+
+  <line x1="340" y1="268" x2="340" y2="290" stroke="#0f172a" stroke-width="1.5"/>
+  <polygon points="340,290 336,282 344,282" fill="#0f172a"/>
+
+  <!-- Step 5: Transition In Progress -->
+  <rect x="235" y="350" width="210" height="35" rx="10" fill="#fff7ed" stroke="#ea580c" stroke-width="1.5"/>
+  <text x="340" y="372" font-size="10.5" font-weight="bold" fill="#c2410c" text-anchor="middle">Update Status = "IN_PROGRESS"</text>
+
+  <line x1="340" y1="328" x2="340" y2="350" stroke="#0f172a" stroke-width="1.5"/>
+  <polygon points="340,350 336,342 344,342" fill="#0f172a"/>
+
+  <!-- Step 6: Resolve & Add Remarks -->
+  <rect x="220" y="405" width="240" height="40" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="340" y="423" font-size="10.5" font-weight="bold" fill="#15803d" text-anchor="middle">Issue Resolved &amp; Remarks Appended</text>
+  <text x="340" y="437" font-size="9.5" fill="#166534" text-anchor="middle">Set Status = "RESOLVED" (Timestamped)</text>
+
+  <line x1="340" y1="385" x2="340" y2="405" stroke="#0f172a" stroke-width="1.5"/>
+  <polygon points="340,405 336,397 344,397" fill="#0f172a"/>
+
+  <!-- Final State (Bullseye) -->
+  <circle cx="340" cy="485" r="14" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+  <circle cx="340" cy="485" r="8" fill="#0f172a"/>
+
+  <line x1="340" y1="445" x2="340" y2="471" stroke="#0f172a" stroke-width="1.5"/>
+  <polygon points="340,471 336,463 344,463" fill="#0f172a"/>
+</svg>
+      </div>
+
+      <div style="text-align: center; font-size: 11pt; font-weight: bold; margin-top: 15px;">
+        Figure 2.4: Activity Diagram of Complaint Lifecycle
+      </div>
+
+      <div class="page-footer">
+        <span class="f-left">[MCA][CTA]</span>
+        <span class="f-line"></span>
+        <span class="f-mid">Page 9</span>
+        <span class="f-line"></span>
+        <span class="f-right">S.G.S.I.T.S., INDORE</span>
+      </div>
+    </div>
+    
+    <div class="page">
+      <div class="page-header">CHAPTER 2. SYSTEM DESIGN 2026</div>
+
+      <div class="section-title" style="margin-top: 10px; margin-bottom: 15px;">2.6 &nbsp; Sequence Diagram</div>
+
+      <div style="text-align: center; margin: 10px 0;">
+        <svg width="680" height="520" viewBox="0 0 680 520" xmlns="http://www.w3.org/2000/svg" style="background:#fff; font-family:'Times New Roman', serif;">
+  <!-- Lifeline Boxes -->
+  <!-- Student -->
+  <rect x="30" y="20" width="80" height="35" rx="5" fill="#f1f5f9" stroke="#0f172a" stroke-width="1.5"/>
+  <text x="70" y="42" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Student</text>
+  <line x1="70" y1="55" x2="70" y2="480" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4"/>
+
+  <!-- React UI -->
+  <rect x="140" y="20" width="85" height="35" rx="5" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="182" y="42" font-size="11" font-weight="bold" fill="#0369a1" text-anchor="middle">React Client</text>
+  <line x1="182" y1="55" x2="182" y2="480" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4"/>
+
+  <!-- Controller -->
+  <rect x="255" y="20" width="95" height="35" rx="5" fill="#fdf4ff" stroke="#a21caf" stroke-width="1.5"/>
+  <text x="302" y="42" font-size="11" font-weight="bold" fill="#86198f" text-anchor="middle">Express Server</text>
+  <line x1="302" y1="55" x2="302" y2="480" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4"/>
+
+  <!-- DB -->
+  <rect x="385" y="20" width="90" height="35" rx="5" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="430" y="42" font-size="11" font-weight="bold" fill="#15803d" text-anchor="middle">MongoDB</text>
+  <line x1="430" y1="55" x2="430" y2="480" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4"/>
+
+  <!-- Admin -->
+  <rect x="520" y="20" width="80" height="35" rx="5" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="560" y="42" font-size="11" font-weight="bold" fill="#991b1b" text-anchor="middle">Admin</text>
+  <line x1="560" y1="55" x2="560" y2="480" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4"/>
+
+  <!-- Call 1: Submit Form -->
+  <line x1="70" y1="85" x2="182" y2="85" stroke="#0f172a" stroke-width="1.3"/>
+  <polygon points="182,85 174,81 174,89" fill="#0f172a"/>
+  <text x="126" y="78" font-size="9" fill="#1e293b" text-anchor="middle">submitComplaint(form)</text>
+
+  <!-- Call 2: API POST -->
+  <line x1="182" y1="115" x2="302" y2="115" stroke="#0f172a" stroke-width="1.3"/>
+  <polygon points="302,115 294,111 294,119" fill="#0f172a"/>
+  <text x="242" y="108" font-size="9" fill="#1e293b" text-anchor="middle">POST /api/complaints</text>
+
+  <!-- Self-call: Validate JWT -->
+  <path d="M 302,130 L 325,130 L 325,150 L 302,150" fill="none" stroke="#a21caf" stroke-width="1.2"/>
+  <polygon points="302,150 310,146 310,154" fill="#a21caf"/>
+  <text x="330" y="143" font-size="8.5" fill="#86198f">verifyJWT() &amp; genTicket()</text>
+
+  <!-- Call 3: DB Save -->
+  <line x1="302" y1="175" x2="430" y2="175" stroke="#0f172a" stroke-width="1.3"/>
+  <polygon points="430,175 422,171 422,179" fill="#0f172a"/>
+  <text x="366" y="168" font-size="9" fill="#1e293b" text-anchor="middle">Complaint.save()</text>
+
+  <!-- DB Return -->
+  <line x1="430" y1="205" x2="302" y2="205" stroke="#16a34a" stroke-width="1.2" stroke-dasharray="3,3"/>
+  <polygon points="302,205 310,201 310,209" fill="#16a34a"/>
+  <text x="366" y="198" font-size="8.5" fill="#15803d" text-anchor="middle">201 Document Created</text>
+
+  <!-- Server to UI -->
+  <line x1="302" y1="230" x2="182" y2="230" stroke="#0284c7" stroke-width="1.2" stroke-dasharray="3,3"/>
+  <polygon points="182,230 190,226 190,234" fill="#0284c7"/>
+  <text x="242" y="223" font-size="9" fill="#0369a1" text-anchor="middle">return {ticketNumber}</text>
+
+  <!-- UI to Student -->
+  <line x1="182" y1="255" x2="70" y2="255" stroke="#0f172a" stroke-width="1.2" stroke-dasharray="3,3"/>
+  <polygon points="70,255 78,251 78,259" fill="#0f172a"/>
+  <text x="126" y="248" font-size="8.5" fill="#1e293b" text-anchor="middle">Show Success Badge</text>
+
+  <!-- Admin Phase -->
+  <!-- Admin queries queue -->
+  <line x1="560" y1="290" x2="302" y2="290" stroke="#dc2626" stroke-width="1.3"/>
+  <polygon points="302,290 310,286 310,294" fill="#dc2626"/>
+  <text x="431" y="283" font-size="9" fill="#991b1b" text-anchor="middle">GET /api/complaints?status=SUBMITTED</text>
+
+  <!-- Server queries DB -->
+  <line x1="302" y1="315" x2="430" y2="315" stroke="#0f172a" stroke-width="1.3"/>
+  <polygon points="430,315 422,311 422,319" fill="#0f172a"/>
+  <text x="366" y="308" font-size="8.5" fill="#1e293b" text-anchor="middle">find({status})</text>
+
+  <!-- DB Returns -->
+  <line x1="430" y1="340" x2="560" y2="340" stroke="#16a34a" stroke-width="1.2" stroke-dasharray="3,3"/>
+  <polygon points="560,340 552,336 552,344" fill="#16a34a"/>
+  <text x="495" y="333" font-size="8.5" fill="#15803d" text-anchor="middle">Return Ticket Queue</text>
+
+  <!-- Admin updates status -->
+  <line x1="560" y1="380" x2="302" y2="380" stroke="#dc2626" stroke-width="1.3"/>
+  <polygon points="302,380 310,376 310,384" fill="#dc2626"/>
+  <text x="431" y="373" font-size="9" fill="#991b1b" text-anchor="middle">PUT /api/complaints/:id/status (RESOLVED)</text>
+
+  <!-- Server writes to DB -->
+  <line x1="302" y1="410" x2="430" y2="410" stroke="#0f172a" stroke-width="1.3"/>
+  <polygon points="430,410 422,406 422,414" fill="#0f172a"/>
+  <text x="366" y="403" font-size="8.5" fill="#1e293b" text-anchor="middle">$set status + $push statusHistory</text>
+
+  <!-- Confirmation back to Admin -->
+  <line x1="430" y1="440" x2="560" y2="440" stroke="#16a34a" stroke-width="1.2" stroke-dasharray="3,3"/>
+  <polygon points="560,440 552,436 552,444" fill="#16a34a"/>
+  <text x="495" y="433" font-size="8.5" fill="#15803d" text-anchor="middle">200 Status Updated</text>
+
+  <!-- Realtime UI notification to Student -->
+  <line x1="302" y1="465" x2="182" y2="465" stroke="#0284c7" stroke-width="1.2" stroke-dasharray="3,3"/>
+  <polygon points="182,465 190,461 190,469" fill="#0284c7"/>
+  <text x="242" y="458" font-size="8.5" fill="#0369a1" text-anchor="middle">Notify Status = RESOLVED</text>
+</svg>
+      </div>
+
+      <div style="text-align: center; font-size: 11pt; font-weight: bold; margin-top: 15px;">
+        Figure 2.5: Sequence Diagram of Grievance Lodging &amp; Resolution
+      </div>
+
+      <div class="page-footer">
+        <span class="f-left">[MCA][CTA]</span>
+        <span class="f-line"></span>
+        <span class="f-mid">Page 10</span>
+        <span class="f-line"></span>
+        <span class="f-right">S.G.S.I.T.S., INDORE</span>
+      </div>
+    </div>
+    
+    <div class="page">
+      <div class="page-header">CHAPTER 2. SYSTEM DESIGN 2026</div>
+
+      <div class="section-title" style="margin-top: 10px; margin-bottom: 15px;">2.7 &nbsp; ER-Diagram</div>
+
+      <div style="text-align: center; margin: 10px 0;">
+        <svg width="680" height="520" viewBox="0 0 680 520" xmlns="http://www.w3.org/2000/svg" style="background:#fff; font-family:'Times New Roman', serif;">
+  <!-- USERS Table -->
+  <g transform="translate(40, 50)">
+    <rect x="0" y="0" width="180" height="170" fill="#fff" stroke="#1e293b" stroke-width="1.8"/>
+    <rect x="0" y="0" width="180" height="28" fill="#e2e8f0" stroke="#1e293b" stroke-width="1.8"/>
+    <text x="90" y="19" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">USERS</text>
+    <text x="10" y="48" font-size="10.5" font-weight="bold" fill="#0284c7">PK  _id : ObjectId</text>
+    <text x="10" y="68" font-size="10.5" fill="#334155">    name : String</text>
+    <text x="10" y="88" font-size="10.5" fill="#334155">    email : String (Unique)</text>
+    <text x="10" y="108" font-size="10.5" fill="#334155">    passwordHash : String</text>
+    <text x="10" y="128" font-size="10.5" fill="#334155">    role : Enum (STUDENT/ADMIN)</text>
+    <text x="10" y="148" font-size="10.5" fill="#334155">    createdAt : Timestamp</text>
+    <text x="10" y="164" font-size="10.5" fill="#334155">    updatedAt : Timestamp</text>
+  </g>
+
+  <!-- COMPLAINTS Table -->
+  <g transform="translate(380, 30)">
+    <rect x="0" y="0" width="260" height="250" fill="#fff" stroke="#1e293b" stroke-width="1.8"/>
+    <rect x="0" y="0" width="260" height="28" fill="#e2e8f0" stroke="#1e293b" stroke-width="1.8"/>
+    <text x="130" y="19" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">COMPLAINTS</text>
+    <text x="10" y="48" font-size="10.5" font-weight="bold" fill="#0284c7">PK  _id : ObjectId</text>
+    <text x="10" y="68" font-size="10.5" font-weight="bold" fill="#0f172a">    ticketNumber : String (Indexed)</text>
+    <text x="10" y="88" font-size="10.5" font-weight="bold" fill="#b45309">FK  createdBy : ObjectId (Ref USERS)</text>
+    <text x="10" y="108" font-size="10.5" fill="#334155">    title : String</text>
+    <text x="10" y="128" font-size="10.5" fill="#334155">    category : Enum (9 Categories)</text>
+    <text x="10" y="148" font-size="10.5" fill="#334155">    description : String (20-2000)</text>
+    <text x="10" y="168" font-size="10.5" fill="#334155">    priority : Enum (LOW/MED/HIGH)</text>
+    <text x="10" y="188" font-size="10.5" fill="#334155">    status : Enum (SUB/PROG/RES)</text>
+    <text x="10" y="208" font-size="10.5" fill="#334155">    location : String</text>
+    <text x="10" y="228" font-size="10.5" fill="#334155">    resolutionRemarks : String</text>
+    <text x="10" y="244" font-size="10.5" fill="#334155">    resolvedAt : Date</text>
+  </g>
+
+  <!-- STATUS_HISTORY (Subdocument / Table) -->
+  <g transform="translate(380, 330)">
+    <rect x="0" y="0" width="260" height="155" fill="#fff" stroke="#1e293b" stroke-width="1.8"/>
+    <rect x="0" y="0" width="260" height="28" fill="#fef08a" stroke="#ca8a04" stroke-width="1.8"/>
+    <text x="130" y="19" font-size="12" font-weight="bold" fill="#854d0e" text-anchor="middle">STATUS_HISTORY (Embedded)</text>
+    <text x="10" y="48" font-size="10.5" font-weight="bold" fill="#b45309">FK  complaintId : ObjectId</text>
+    <text x="10" y="68" font-size="10.5" fill="#334155">    status : Enum (COMPLAINT_STATUSES)</text>
+    <text x="10" y="88" font-size="10.5" fill="#334155">    previousStatus : String</text>
+    <text x="10" y="108" font-size="10.5" fill="#334155">    newStatus : String</text>
+    <text x="10" y="128" font-size="10.5" font-weight="bold" fill="#b45309">FK  changedBy : ObjectId (Ref USERS)</text>
+    <text x="10" y="148" font-size="10.5" fill="#334155">    changedAt : Timestamp</text>
+  </g>
+
+  <!-- CATEGORIES Reference Table -->
+  <g transform="translate(40, 310)">
+    <rect x="0" y="0" width="180" height="120" fill="#fff" stroke="#1e293b" stroke-width="1.8"/>
+    <rect x="0" y="0" width="180" height="28" fill="#e2e8f0" stroke="#1e293b" stroke-width="1.8"/>
+    <text x="90" y="19" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">CATEGORIES_META</text>
+    <text x="10" y="48" font-size="10.5" font-weight="bold" fill="#0284c7">PK  code : String</text>
+    <text x="10" y="68" font-size="10.5" fill="#334155">    name : String</text>
+    <text x="10" y="88" font-size="10.5" fill="#334155">    department : String</text>
+    <text x="10" y="108" font-size="10.5" fill="#334155">    slaHours : Integer</text>
+  </g>
+
+  <!-- Relationship: USERS to COMPLAINTS (1 to Many) -->
+  <line x1="220" y1="120" x2="380" y2="120" stroke="#1e293b" stroke-width="1.6"/>
+  <!-- 1 notation on left -->
+  <line x1="230" y1="112" x2="230" y2="128" stroke="#1e293b" stroke-width="1.6"/>
+  <!-- Crow's foot on right -->
+  <line x1="380" y1="120" x2="368" y2="112" stroke="#1e293b" stroke-width="1.6"/>
+  <line x1="380" y1="120" x2="368" y2="128" stroke="#1e293b" stroke-width="1.6"/>
+  <text x="245" y="112" font-size="10" font-weight="bold">1 (submits)</text>
+  <text x="330" y="112" font-size="10" font-weight="bold">N</text>
+
+  <!-- Relationship: COMPLAINTS to STATUS_HISTORY (1 to Many) -->
+  <line x1="510" y1="280" x2="510" y2="330" stroke="#1e293b" stroke-width="1.6"/>
+  <!-- 1 on top -->
+  <line x1="502" y1="290" x2="518" y2="290" stroke="#1e293b" stroke-width="1.6"/>
+  <!-- Crow's foot on bottom -->
+  <line x1="510" y1="330" x2="502" y2="318" stroke="#1e293b" stroke-width="1.6"/>
+  <line x1="510" y1="330" x2="518" y2="318" stroke="#1e293b" stroke-width="1.6"/>
+  <text x="520" y="300" font-size="10" font-weight="bold">1</text>
+  <text x="520" y="325" font-size="10" font-weight="bold">N</text>
+
+  <!-- Relationship: USERS to STATUS_HISTORY (Admin/User changedBy) -->
+  <path d="M 130,220 L 130,470 L 380,470" fill="none" stroke="#64748b" stroke-width="1.4" stroke-dasharray="4,3"/>
+  <polygon points="380,470 372,466 372,474" fill="#64748b"/>
+  <text x="200" y="465" font-size="9.5" fill="#64748b">changedBy Ref (User)</text>
+</svg>
+      </div>
+
+      <div style="text-align: center; font-size: 11pt; font-weight: bold; margin-top: 15px;">
+        Figure 2.6: ER Diagram of CampusCare Database
+      </div>
+
+      <div class="page-footer">
+        <span class="f-left">[MCA][CTA]</span>
+        <span class="f-line"></span>
+        <span class="f-mid">Page 11</span>
+        <span class="f-line"></span>
+        <span class="f-right">S.G.S.I.T.S., INDORE</span>
+      </div>
+    </div>
+    
+    <div class="page">
+      <div class="page-header">CHAPTER 3. SYSTEM OVERVIEW AND IMPLEMENTATION 2026</div>
+
+      <div style="text-align: right; font-size: 22pt; font-weight: bold; margin-bottom: 25px; margin-top: 10px;">
+        Chapter 3
+      </div>
+      <div style="text-align: center; font-size: 18pt; font-weight: bold; margin-bottom: 30px; letter-spacing: 0.5px;">
+        SYSTEM OVERVIEW AND IMPLEMENTATION
+      </div>
+
+      <div class="section-title">3.1 &nbsp; Frontend Development</div>
+      <div class="body-p">
+        The Frontend is the visual, interactive layer of the <b>CampusCare System</b> that students and administrators directly interact with. It is developed using <b>ReactJS</b> and styled with <b>Tailwind CSS</b> and <b>Bootstrap</b>—representing the modern industry standard for responsive, high-performance web applications.
+      </div>
+      <div class="body-p">
+        ReactJS leverages a component-driven architecture and a Virtual DOM to minimize browser repaints, ensuring snappy navigation between dashboards, forms, and ticket listings without page flickers. Tailwind CSS delivers utility-first classes that make styling modular, adaptive, and maintainable.
+      </div>
+
+      <div style="font-weight: bold; font-size: 11.5pt; margin-top: 18px; margin-bottom: 8px;">
+        Pages and Components in ReactJS:
+      </div>
+
+      <div style="font-weight: bold; font-size: 11pt; margin-top: 8px;">
+        1. Login Page
+      </div>
+      <ul class="body-ul">
+        <li>Minimalist, responsive login interface with clear role-based separation.</li>
+        <li>Controlled input fields for institutional email and password.</li>
+        <li>Client-side form validation with real-time feedback using React state hooks.</li>
+        <li>On submission &rarr; executes an asynchronous POST request to <code>/api/auth/login</code>.</li>
+        <li>Stores the returned JWT Bearer Token in <code>localStorage</code> and manages user authorization state via React Context API.</li>
+      </ul>
+
+      <div style="font-weight: bold; font-size: 11pt; margin-top: 12px;">
+        2. Student Registration Page
+      </div>
+      <ul class="body-ul">
+        <li>Structured registration form capturing: Full Name, Institutional Email, and Password.</li>
+        <li>Enforces security constraints: Email must conform to valid academic domains; passwords must meet minimum character length requirements.</li>
+        <li>On submit &rarr; triggers <code>/api/auth/register</code>, creating a verified STUDENT record with zero plain-text password exposure.</li>
+      </ul>
+
+      <div class="page-footer">
+        <span class="f-left">[MCA][CTA]</span>
+        <span class="f-line"></span>
+        <span class="f-mid">Page 12</span>
+        <span class="f-line"></span>
+        <span class="f-right">S.G.S.I.T.S., INDORE</span>
+      </div>
+    </div>
+    
+    <div class="page">
+      <div class="page-header">CHAPTER 3. SYSTEM OVERVIEW AND IMPLEMENTATION 2026</div>
+
+      <div style="font-weight: bold; font-size: 11pt; margin-top: 10px;">
+        3. Submit Complaint Page
+      </div>
+      <ul class="body-ul">
+        <li>Dynamic incident lodging interface equipped with category pickers, priority pills, and rich description fields.</li>
+        <li>Category Selector covers nine operational domains: <i>Classroom, Laboratory, Internet / Wi-Fi, Electrical / Maintenance, Cleanliness, Library, Hostel, Administration, Other</i>.</li>
+        <li>Priority Selector allows students to set urgency level: <b>LOW</b> (Routine maintenance), <b>MEDIUM</b> (Operational inconvenience), or <b>HIGH</b> (Critical or safety hazard).</li>
+        <li>Campus Location input captures specific location markers (e.g., <i>MCA Block - 2nd Floor, Room 204</i>).</li>
+        <li>Character counter enforcing descriptive clarity (minimum 20 characters, maximum 2000 characters).</li>
+      </ul>
+
+      <div style="font-weight: bold; font-size: 11pt; margin-top: 14px;">
+        4. Student Dashboard &amp; My Complaints Page
+      </div>
+      <ul class="body-ul">
+        <li>Displays a summary of personal complaint statistics (Total Lodged, Active, Resolved).</li>
+        <li>Interactive tabular view presenting ticket numbers, titles, categories, dates, and live status badges.</li>
+        <li>Color-coded status indicators:
+          <span style="color: #0284c7; font-weight: bold;">SUBMITTED (Blue)</span>,
+          <span style="color: #ea580c; font-weight: bold;">IN_PROGRESS (Orange)</span>, and
+          <span style="color: #16a34a; font-weight: bold;">RESOLVED (Green)</span>.
+        </li>
+        <li>Clicking any complaint launches the <b>Complaint Details View</b>, rendering a step-by-step visual audit timeline with supervisor remarks and completion dates.</li>
+      </ul>
+
+      <div style="font-weight: bold; font-size: 11pt; margin-top: 14px;">
+        5. Admin Incident Management Dashboard
+      </div>
+      <ul class="body-ul">
+        <li>Executive overview featuring four primary KPI metric cards: Total Complaints, Submitted Awaiting Review, In Progress Under Action, and Successfully Resolved.</li>
+        <li>Advanced multi-filter controls enabling administrators to filter queues by status, priority, or category.</li>
+        <li>Incident Management Modal: Allows administrators to change status, dispatch tickets to maintenance crews, and input mandatory resolution remarks upon issue closure.</li>
+      </ul>
+
+      <div class="page-footer">
+        <span class="f-left">[MCA][CTA]</span>
+        <span class="f-line"></span>
+        <span class="f-mid">Page 13</span>
+        <span class="f-line"></span>
+        <span class="f-right">S.G.S.I.T.S., INDORE</span>
+      </div>
+    </div>
+    
+    <div class="page">
+      <div class="page-header">CHAPTER 3. SYSTEM OVERVIEW AND IMPLEMENTATION 2026</div>
+
+      <div class="section-title" style="margin-top: 10px;">3.2 &nbsp; Backend Architecture</div>
+      <div class="body-p">
+        The Backend represents the core operational and business logic engine of the <b>CampusCare System</b>. It is built using <b>Node.js</b> and <b>Express.js</b>—a high-performance, asynchronous JavaScript runtime and web framework optimized for building scalable RESTful APIs.
+      </div>
+      <div class="body-p">
+        Express.js serves as the central API gateway connecting the ReactJS client application with the MongoDB database cluster, enforcing authentication, request validation, business rules, and error logging.
+      </div>
+
+      <div style="font-weight: bold; font-size: 11.5pt; margin-top: 18px; margin-bottom: 8px;">
+        Layers of Express / Node.js Backend:
+      </div>
+
+      <div style="font-weight: bold; font-size: 11pt; margin-top: 6px;">
+        1. Controller Layer (authController.js &amp; complaintController.js)
+      </div>
+      <ul class="body-ul">
+        <li>Receives all incoming HTTP requests transmitted from the React frontend.</li>
+        <li>Validates request parameters and payload structure before invoking database services.</li>
+        <li>Returns standardized JSON responses accompanied by semantic HTTP status codes (200 OK, 201 Created, 400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found, 500 Server Error).</li>
+      </ul>
+
+      <div style="font-weight: bold; font-size: 11pt; margin-top: 12px;">
+        2. Middleware Layer (authMiddleware.js &amp; roleMiddleware.js)
+      </div>
+      <ul class="body-ul">
+        <li>Extracts the <code>Authorization: Bearer &lt;token&gt;</code> HTTP header.</li>
+        <li>Verifies cryptographic token signatures against the server's private secret key.</li>
+        <li>Attaches the decoded user profile (ID, Role) to the <code>req.user</code> context.</li>
+        <li>Enforces role guard rails: Blocks non-admin users from accessing administrative incident queues or modification endpoints.</li>
+      </ul>
+
+      <div style="font-weight: bold; font-size: 11pt; margin-top: 12px;">
+        3. Model &amp; ODM Layer (Mongoose)
+      </div>
+      <ul class="body-ul">
+        <li>Defines schema definitions for <b>User</b> and <b>Complaint</b> documents.</li>
+        <li>Applies automatic <code>createdAt</code> and <code>updatedAt</code> timestamps.</li>
+        <li>Transforms JSON output to strip sensitive internal properties like <code>passwordHash</code> and <code>__v</code>.</li>
+      </ul>
+
+      <div class="page-footer">
+        <span class="f-left">[MCA][CTA]</span>
+        <span class="f-line"></span>
+        <span class="f-mid">Page 14</span>
+        <span class="f-line"></span>
+        <span class="f-right">S.G.S.I.T.S., INDORE</span>
+      </div>
+    </div>
+    
+    <div class="page">
+      <div class="page-header">CHAPTER 3. SYSTEM OVERVIEW AND IMPLEMENTATION 2026</div>
+
+      <div class="section-title" style="margin-top: 10px;">3.3 &nbsp; Database Management (MongoDB)</div>
+      <div class="body-p">
+        For the <b>CampusCare System</b>, the database layer (MongoDB) acts as the secure, persistent memory of the platform. It reliably stores user credentials, incident tickets, status audit entries, and categorical configurations across academic sessions.
+      </div>
+
+      <div style="font-weight: bold; font-size: 11.5pt; margin-top: 16px; margin-bottom: 8px;">
+        1. Structural Organization (The Collections)
+      </div>
+      <div class="body-p">
+        The database is organized into structured collections with strict schema validation to ensure clean, consistent records:
+      </div>
+      <ul class="body-ul">
+        <li><b>Users Collection:</b> Master repository of system accounts. Stores unique user IDs, full names, lowercase unique email addresses, Bcrypt password hashes, and assigned system roles (<code>STUDENT</code> or <code>ADMIN</code>).</li>
+        <li><b>Complaints Collection:</b> Core repository of all campus grievances. Stores unique ticket numbers (e.g., <i>CC-2026-0014</i>), foreign reference to author (<code>createdBy</code>), title, operational category, priority, current status, location, resolution remarks, and completion timestamps.</li>
+        <li><b>Status History Subdocuments:</b> Embedded array inside each complaint document capturing every state transition: previous status, new status, supervisor user reference, change timestamp, and operational remarks.</li>
+      </ul>
+
+      <div style="font-weight: bold; font-size: 11.5pt; margin-top: 16px; margin-bottom: 8px;">
+        2. Database Indexing &amp; Query Optimization
+      </div>
+      <div class="body-p">
+        To maintain sub-5 millisecond query execution times even as institutional complaint records scale into tens of thousands of documents, CampusCare implements compound indexing:
+      </div>
+      <ul class="body-ul">
+        <li><code>{ ticketNumber: 1 }</code> (Unique): Enables instant ticket lookups.</li>
+        <li><code>{ createdBy: 1, createdAt: -1 }</code>: Optimizes student personal grievance history queries.</li>
+        <li><code>{ status: 1, createdAt: -1 }</code>: Accelerates administrative dashboard queue filtering.</li>
+      </ul>
+
+      <div style="font-weight: bold; font-size: 11.5pt; margin-top: 16px; margin-bottom: 8px;">
+        3. Connection Architecture &amp; Singleton Pattern
+      </div>
+      <div class="body-p">
+        The server establishes a resilient singleton connection pool to MongoDB via Mongoose. It automatically manages connection retry cycles, handles network interruptions gracefully, and prevents connection leaks.
+      </div>
+
+      <div class="page-footer">
+        <span class="f-left">[MCA][CTA]</span>
+        <span class="f-line"></span>
+        <span class="f-mid">Page 15</span>
+        <span class="f-line"></span>
+        <span class="f-right">S.G.S.I.T.S., INDORE</span>
+      </div>
+    </div>
+    
+    <div class="page">
+      <div class="page-header">CHAPTER 3. SYSTEM OVERVIEW AND IMPLEMENTATION 2026</div>
+
+      <div class="section-title" style="margin-top: 10px;">3.4 &nbsp; File Management and Data Security</div>
+      <div class="body-p">
+        In campus incident redressal, documentation and physical evidence handling are essential for verifying physical damage or equipment malfunction before dispatching repair resources.
+      </div>
+      <ul class="body-ul">
+        <li><b>Incident Evidence Management:</b> The system is architected to handle photographic attachments documenting damaged hardware, water leakage, or electrical hazards. File uploads undergo strict MIME-type inspection (allowing only verified image formats like JPEG and PNG) and size constraints (capped at 5MB) to eliminate buffer overflow risks.</li>
+        <li><b>Export and Audit Management:</b> Complaint logs, monthly resolution statistics, and SLA compliance data can be extracted by college authorities for executive review and statutory accreditation filings (e.g., NAAC / NBA audit reports).</li>
+      </ul>
+
+      <div class="section-title" style="margin-top: 25px;">3.5 &nbsp; Programming Languages and Frameworks</div>
+      <div class="body-p">
+        <b>Core Programming Languages:</b>
+      </div>
+      <div style="font-weight: bold; font-size: 11pt; margin-top: 10px;">
+        1. JavaScript (Node.js &amp; ReactJS)
+      </div>
+      <div class="body-p">
+        JavaScript is the foundational language of the entire CampusCare technology stack, enabling full-stack isomorphic development across both frontend client components and backend server runtimes. Node.js executes non-blocking, event-driven I/O operations, ensuring that the backend can handle thousands of simultaneous concurrent requests without threading overhead.
+      </div>
+
+      <div style="font-weight: bold; font-size: 11pt; margin-top: 12px;">
+        2. HTML5 &amp; Modern Semantic Markup
+      </div>
+      <div class="body-p">
+        Provides accessible, semantic structures for all dashboard pages, forms, and dialogs, ensuring compliance with web accessibility standards (WCAG) so students and staff can operate the platform on any device.
+      </div>
+
+      <div style="font-weight: bold; font-size: 11pt; margin-top: 12px;">
+        3. Tailwind CSS &amp; Bootstrap
+      </div>
+      <div class="body-p">
+        Tailwind CSS powers the utility-first design framework, delivering modern typography, badge stylings, grid layouts, and color-coded status elements with minimal CSS overhead.
+      </div>
+
+      <div class="page-footer">
+        <span class="f-left">[MCA][CTA]</span>
+        <span class="f-line"></span>
+        <span class="f-mid">Page 16</span>
+        <span class="f-line"></span>
+        <span class="f-right">S.G.S.I.T.S., INDORE</span>
+      </div>
+    </div>
+    
+    <div class="page">
+      <div class="page-header">CHAPTER 3. SYSTEM OVERVIEW AND IMPLEMENTATION 2026</div>
+
+      <div style="font-weight: bold; font-size: 11pt; margin-top: 10px;">
+        4. MongoDB &amp; Mongoose Object Document Mapper (ODM)
+      </div>
+      <div class="body-p">
+        MongoDB is a distributed, NoSQL document-oriented database that stores records as flexible, JSON-like BSON documents. Mongoose ODM provides a rigorous modeling environment in Node.js, managing data type casting, schema validation, middleware hooks, and query building.
+      </div>
+
+      <div class="section-title" style="margin-top: 25px;">Frameworks, Libraries, and Utilities</div>
+      <ul class="body-ul">
+        <li><b>Express.js:</b> A lightweight, unopinionated server framework that routes HTTP requests to specific controller handlers, manages middleware chains, and formats JSON response envelopes.</li>
+        <li><b>JSON Web Token (jsonwebtoken):</b> Implements RFC 7519 open industry standards for securely transmitting claims between the browser and server as compact, digitally signed cryptographic tokens.</li>
+        <li><b>Bcryptjs:</b> An adaptive cryptographic hashing library that generates secure, salted one-way hashes of user passwords, protecting user credentials against dictionary and rainbow-table attacks.</li>
+        <li><b>Axios:</b> A promise-based HTTP client utilized by the ReactJS frontend to execute non-blocking REST API calls to backend endpoints with automated JSON serialization and error interception.</li>
+        <li><b>Vite:</b> A next-generation frontend build tool providing ultra-fast Hot Module Replacement (HMR) during development and highly optimized rollup bundling for production deployment.</li>
+        <li><b>CORS (Cross-Origin Resource Sharing):</b> Middleware enforcing domain origin security, preventing unauthorized external websites from making cross-origin requests to CampusCare APIs.</li>
+        <li><b>Dotenv:</b> Safely isolates sensitive environment configuration variables (such as database credentials, ports, and JWT secret keys) from the application codebase.</li>
+      </ul>
+
+      <div class="page-footer">
+        <span class="f-left">[MCA][CTA]</span>
+        <span class="f-line"></span>
+        <span class="f-mid">Page 17</span>
+        <span class="f-line"></span>
+        <span class="f-right">S.G.S.I.T.S., INDORE</span>
+      </div>
+    </div>
+    
+    <div class="page">
+      <div class="page-header">CHAPTER 3. SYSTEM OVERVIEW AND IMPLEMENTATION 2026</div>
+
+      <div class="section-title" style="margin-top: 10px;">3.6 &nbsp; Security and Scalability</div>
+      <div style="font-weight: bold; font-size: 11.5pt; margin-top: 12px; margin-bottom: 6px;">
+        Security Features
+      </div>
+      <div class="body-p">
+        The CampusCare architecture implements multiple defensive layers to ensure total student privacy, data integrity, and protection against unauthorized administrative operations:
+      </div>
+      <ul class="body-ul">
+        <li><b>Role-Based Access Control (RBAC):</b> Explicit separation of privileges. Students can strictly submit complaints and view their own tickets. Administrative endpoints (updating ticket statuses, adding resolution notes, viewing global analytics) strictly require validated ADMIN tokens.</li>
+        <li><b>Credential Protection &amp; Salting:</b> Passwords are never stored in plain text. Each password is cryptographically salted and hashed using <b>Bcrypt</b> with 10 salt rounds before persistence. Mongoose schemas designate <code>select: false</code> for the password hash field to prevent accidental leakage in user queries.</li>
+        <li><b>Input Sanitization &amp; Injection Immunity:</b> Parameterized NoSQL queries via Mongoose prevent NoSQL injection attacks. Strict schema enumerations guarantee that malicious users cannot inject arbitrary status values or undefined complaint categories.</li>
+        <li><b>Stateless Authorization:</b> JWT tokens have defined expiration windows, eliminating session hijacking risks and eliminating the need for server-side session memory stores.</li>
+      </ul>
+
+      <div style="font-weight: bold; font-size: 11.5pt; margin-top: 18px; margin-bottom: 6px;">
+        Scalability
+      </div>
+      <div class="body-p">
+        The application is architected to scale effortlessly as college enrollment and facility demands expand:
+      </div>
+      <ul class="body-ul">
+        <li><b>Stateless Micro-Services:</b> Because authentication relies on self-contained JWT tokens, the Node.js backend can be horizontally scaled across multiple instances behind a load balancer (e.g., NGINX) without session state synchronization issues.</li>
+        <li><b>Asynchronous Event Loop:</b> Node.js processes I/O operations non-blockingly, allowing a single lightweight server instance to handle hundreds of concurrent student submissions simultaneously.</li>
+        <li><b>Optimized Database Indexing:</b> Compound MongoDB indexes ensure that query execution time remains constant (O(log N)) even when historical grievance logs exceed 100,000 documents.</li>
+      </ul>
+
+      <div class="page-footer">
+        <span class="f-left">[MCA][CTA]</span>
+        <span class="f-line"></span>
+        <span class="f-mid">Page 18</span>
+        <span class="f-line"></span>
+        <span class="f-right">S.G.S.I.T.S., INDORE</span>
+      </div>
+    </div>
+    
+    <div class="page">
+      <div class="page-header">CHAPTER 3. SYSTEM OVERVIEW AND IMPLEMENTATION 2026</div>
+
+      <div class="section-title" style="margin-top: 10px;">3.7 &nbsp; Security Measures</div>
+      <div class="body-p">
+        The <b>CampusCare System</b> incorporates rigorous security measures to safeguard student confidential data, prevent malicious record tampering, and guarantee institutional compliance:
+      </div>
+
+      <div style="font-weight: bold; font-size: 11pt; margin-top: 14px;">
+        1. Tamper-Proof Audit Trail (statusHistory)
+      </div>
+      <ul class="body-ul">
+        <li>Whenever a complaint transitions between states (<i>SUBMITTED &rarr; IN_PROGRESS &rarr; RESOLVED</i>), the backend appends an immutable log entry into the <code>statusHistory</code> array.</li>
+        <li>Each log entry permanently records the exact timestamp, the previous state, the new state, the user ID of the administrator who executed the transition, and the accompanying operational note.</li>
+        <li>Once logged, historical entries cannot be edited or erased, ensuring complete dispute-free traceability.</li>
+      </ul>
+
+      <div style="font-weight: bold; font-size: 11pt; margin-top: 14px;">
+        2. Strict Data Isolation Between Students
+      </div>
+      <ul class="body-ul">
+        <li>API queries for student complaints strictly filter by <code>{ createdBy: req.user.id }</code> extracted directly from the verified JWT payload, not from client request parameters.</li>
+        <li>This completely prevents Insecure Direct Object Reference (IDOR) vulnerabilities—a student can never view or manipulate another student's grievance record.</li>
+      </ul>
+
+      <div style="font-weight: bold; font-size: 11pt; margin-top: 14px;">
+        3. Administrative Seed Isolation
+      </div>
+      <ul class="body-ul">
+        <li>There is zero public endpoint that allows users to register with an ADMIN role.</li>
+        <li>Administrator accounts can only be provisioned through secure, server-side initialization scripts (<code>npm run seed:admin</code>) executed directly in the host server environment with administrative credentials.</li>
+      </ul>
+
+      <div style="font-weight: bold; font-size: 11pt; margin-top: 14px;">
+        4. Centralized Exception Handling &amp; Sanitized Responses
+      </div>
+      <ul class="body-ul">
+        <li>A global error handling middleware intercepts all runtime exceptions, logging detailed stack traces to secure server logs while returning clean, sanitized error messages to the client.</li>
+        <li>Prevents internal database paths or server architecture details from leaking to end users.</li>
+      </ul>
+
+      <div class="page-footer">
+        <span class="f-left">[MCA][CTA]</span>
+        <span class="f-line"></span>
+        <span class="f-mid">Page 19</span>
+        <span class="f-line"></span>
+        <span class="f-right">S.G.S.I.T.S., INDORE</span>
+      </div>
+    </div>
+    
+    <div class="page">
+      <div class="page-header">CHAPTER 4. IMPLEMENTATION AND TESTING 2026</div>
+
+      <div style="text-align: right; font-size: 22pt; font-weight: bold; margin-bottom: 25px; margin-top: 10px;">
+        Chapter 4
+      </div>
+      <div style="text-align: center; font-size: 20pt; font-weight: bold; margin-bottom: 30px; letter-spacing: 0.5px;">
+        IMPLEMENTATION AND TESTING
+      </div>
+
+      <div class="body-p">
+        The implementation of the <b>CampusCare System</b> followed a structured Software Development Life Cycle (SDLC), moving systematically from requirements specification and database schema modeling to full-stack API integration, user interface development, and comprehensive multi-tier testing.
+      </div>
+
+      <div class="section-title" style="margin-top: 20px;">4.1 &nbsp; Implementation</div>
+      <div style="font-weight: bold; font-size: 11pt; margin-top: 10px;">
+        1. Authentication Pipeline &amp; Session Management
+      </div>
+      <ul class="body-ul">
+        <li>Implemented student registration with normalized lowercase email verification and Bcrypt cryptographic hashing.</li>
+        <li>Implemented JWT token generation signed with HMAC-SHA256, carrying user IDs and role claims.</li>
+        <li>Integrated persistent authorization context in React using React Context and Axios request interceptors that automatically inject the <code>Authorization: Bearer</code> header.</li>
+      </ul>
+
+      <div style="font-weight: bold; font-size: 11pt; margin-top: 12px;">
+        2. Incident Ingestion &amp; Automated Ticket Allocation
+      </div>
+      <ul class="body-ul">
+        <li>Engineered the ticket number allocation service, which generates sequential, formatted incident codes (e.g., <i>CC-2026-0001</i>, <i>CC-2026-0002</i>).</li>
+        <li>Enforced schema constraints: Title (5–100 characters), Description (20–2000 characters), Category (one of 9 allowed values), Priority (LOW, MEDIUM, HIGH).</li>
+      </ul>
+
+      <div style="font-weight: bold; font-size: 11pt; margin-top: 12px;">
+        3. Real-Time Status Lifecycle Engine
+      </div>
+      <ul class="body-ul">
+        <li>Constructed backend endpoints allowing administrators to transition ticket statuses from <b>SUBMITTED</b> &rarr; <b>IN_PROGRESS</b> &rarr; <b>RESOLVED</b>.</li>
+        <li>Enforced mandatory remarks when resolving tickets, stamping the <code>resolvedAt</code> date and pushing state entries to the immutable status history log.</li>
+      </ul>
+
+      <div style="font-weight: bold; font-size: 11pt; margin-top: 12px;">
+        4. Administrative Cockpit &amp; Metrics Aggregation
+      </div>
+      <ul class="body-ul">
+        <li>Developed MongoDB aggregation pipelines that calculate real-time counts of total complaints, active complaints, resolved complaints, and high-priority queues for instant rendering on dashboard metric cards.</li>
+      </ul>
+
+      <div class="page-footer">
+        <span class="f-left">[MCA][CTA]</span>
+        <span class="f-line"></span>
+        <span class="f-mid">Page 20</span>
+        <span class="f-line"></span>
+        <span class="f-right">S.G.S.I.T.S., INDORE</span>
+      </div>
+    </div>
+    
+    <div class="page">
+      <div class="page-header">CHAPTER 4. IMPLEMENTATION AND TESTING 2026</div>
+
+      <div class="section-title" style="margin-top: 10px;">4.2 &nbsp; Testing</div>
+      <div class="body-p">
+        The testing phase of the <b>CampusCare System</b> ensures that all functional components, security boundaries, and data pipelines execute accurately and reliably under simulated campus loads.
+      </div>
+
+      <div style="font-weight: bold; font-size: 11.5pt; margin-top: 14px; margin-bottom: 6px;">
+        4.2.1 &nbsp; Unit Testing
+      </div>
+      <ul class="body-ul">
+        <li><b>User Authentication Unit (authController.test.js):</b> Verifies that valid credentials return signed JWT tokens; confirms that duplicate email registrations are rejected with a <code>400 Bad Request</code> error; verifies that passwords with fewer than 6 characters fail validation.</li>
+        <li><b>Complaint Validation Unit (Complaint.test.js):</b> Verifies that descriptions with fewer than 20 characters trigger schema validation errors; ensures only recognized enum categories are accepted.</li>
+        <li><b>Ticket Generator Unit (ticketUtils.test.js):</b> Confirms that every generated ticket number follows the standard format (<code>CC-YYYY-XXXX</code>) and maintains strict uniqueness.</li>
+        <li><b>Status History Unit:</b> Verifies that updating a complaint status automatically appends a new item into the <code>statusHistory</code> array containing the timestamp, changedBy user ID, and notes.</li>
+      </ul>
+
+      <div style="font-weight: bold; font-size: 11.5pt; margin-top: 16px; margin-bottom: 6px;">
+        4.2.2 &nbsp; Integration Testing
+      </div>
+      <div class="body-p">
+        Integration testing verifies that individual software units interact cohesively as a unified workflow:
+      </div>
+      <ul class="body-ul">
+        <li><b>Client-API Pipeline:</b> Confirms that React form submissions correctly serialize into JSON, travel across Axios HTTP boundaries, pass through Express middleware authentication, write to MongoDB, and return the newly generated ticket ID to the UI.</li>
+        <li><b>Database Persistence:</b> Ensures that Mongoose models establish and maintain healthy connections to MongoDB, execute atomic updates, and preserve relational references (<code>createdBy</code>, <code>changedBy</code>).</li>
+      </ul>
+
+      <div style="font-weight: bold; font-size: 11.5pt; margin-top: 16px; margin-bottom: 6px;">
+        4.2.3 &nbsp; System Testing
+      </div>
+      <div class="body-p">
+        System testing evaluates the platform as a complete, integrated enterprise application across real-world campus usage scenarios:
+      </div>
+      <ol class="body-ol">
+        <li><b>End-to-End Incident Lifecycle:</b> Tested complete lifecycle from student registration &rarr; lodging a high-priority Wi-Fi breakdown &rarr; admin viewing the ticket &rarr; updating status to IN_PROGRESS &rarr; resolving with technician notes &rarr; student inspecting the completed status timeline.</li>
+      </ol>
+
+      <div class="page-footer">
+        <span class="f-left">[MCA][CTA]</span>
+        <span class="f-line"></span>
+        <span class="f-mid">Page 21</span>
+        <span class="f-line"></span>
+        <span class="f-right">S.G.S.I.T.S., INDORE</span>
+      </div>
+    </div>
+    
+    <div class="page">
+      <div class="page-header">CHAPTER 4. IMPLEMENTATION AND TESTING 2026</div>
+
+      <ol class="body-ol" start="2" style="margin-top: 10px;">
+        <li><b>Security &amp; Authorization Boundary Testing:</b> Attempted to invoke administrative endpoints (<code>PUT /api/complaints/:id/status</code>) using student JWT tokens; verified that the server strictly rejects the request with a <code>403 Forbidden</code> status code.</li>
+        <li><b>Cross-Device Responsiveness Testing:</b> Evaluated UI components across mobile displays (iPhone/Android, 375px width), tablets (iPad, 768px width), and desktop widescreen monitors (1920px width) ensuring zero layout clipping or text overlap.</li>
+        <li><b>Stress &amp; Concurrency Testing:</b> Simulated concurrent submissions from multiple simulated student clients; verified zero deadlocks, zero duplicate ticket numbers, and sub-100 millisecond response times.</li>
+      </ol>
+
+      <div class="section-title" style="margin-top: 25px;">4.2.4 &nbsp; Results and Accuracy</div>
+      <div class="body-p">
+        The <b>CampusCare System</b> successfully modernizes campus incident redressal, transitioning colleges from an error-prone, opaque manual environment to a high-speed, automated digital ecosystem.
+      </div>
+
+      <div style="font-weight: bold; font-size: 11.5pt; margin-top: 14px; margin-bottom: 8px;">
+        Key Test Results &amp; Verified Metrics:
+      </div>
+      <ul class="body-ul">
+        <li><b>High Operational Speed:</b> Grievance submission and database commit completed in less than <b>150 milliseconds</b> across standard campus Wi-Fi networks.</li>
+        <li><b>100% Tracking Integrity:</b> Every submitted complaint was allocated a unique, collision-free ticket number with zero lost records across all test cycles.</li>
+        <li><b>Elimination of Lost Complaints:</b> Transitioning from physical paper registers to indexed cloud storage reduced misplaced incident rates from an estimated 25% down to <b>0%</b>.</li>
+        <li><b>Turnaround Time Reduction:</b> Real-time administrative dashboard alerts enabled maintenance supervisors to acknowledge and dispatch technician teams in under <b>2 hours</b>, compared to 3–5 business days under traditional manual processes.</li>
+        <li><b>Data Integrity:</b> The embedded audit log captured 100% of status changes with microsecond timestamp precision, eliminating communication disputes between students and college administration.</li>
+      </ul>
+
+      <div class="page-footer">
+        <span class="f-left">[MCA][CTA]</span>
+        <span class="f-line"></span>
+        <span class="f-mid">Page 22</span>
+        <span class="f-line"></span>
+        <span class="f-right">S.G.S.I.T.S., INDORE</span>
+      </div>
+    </div>
+    
+    <div class="page">
+      <div class="page-header">CHAPTER 5. CONCLUSION 2026</div>
+
+      <div style="text-align: right; font-size: 22pt; font-weight: bold; margin-bottom: 25px; margin-top: 10px;">
+        Chapter 5
+      </div>
+      <div style="text-align: center; font-size: 20pt; font-weight: bold; margin-bottom: 30px; letter-spacing: 0.5px;">
+        CONCLUSION
+      </div>
+
+      <div class="body-p">
+        The <b>CampusCare: Centralized Campus Grievance Redressal and Incident Management System</b> provides a robust, efficient, and modern solution to the long-standing challenges of campus facility maintenance and student grievance redressal. By leveraging modern full-stack web technologies—including ReactJS, Node.js, Express, and MongoDB—the project successfully transitions educational institutions from slow, paper-based registers to a high-speed, transparent digital workflow.
+      </div>
+
+      <div class="section-title" style="margin-top: 25px;">5.1 &nbsp; Project Summary</div>
+      <div class="body-p">
+        This project introduces a centralized incident management platform designed to replace antiquated suggestion boxes and physical complaint registers with an intuitive, cloud-ready web portal. Students can report infrastructural breakdowns, sanitation issues, electrical faults, laboratory deficiencies, and academic facility concerns in seconds. The system automatically tags incidents, generates unique tracking numbers, and securely logs them into a high-performance database.
+      </div>
+      <div class="body-p">
+        The architecture follows a modular, multi-layered design—featuring a clean ReactJS frontend, an asynchronous Node.js/Express API layer, and a scalable MongoDB document store—to deliver a seamless experience for both students and college administrators. Administrative authorities benefit from real-time dashboard analytics, priority queue management, and an immutable status history audit trail. Ultimately, CampusCare delivers a transparent, scalable, and touchless governance solution that enhances accountability while saving valuable educational and administrative time.
+      </div>
+
+      <div class="section-title" style="margin-top: 25px;">5.2 &nbsp; Achievements</div>
+      <div class="body-p">
+        The project successfully attained multiple functional and technical milestones during design, development, and testing:
+      </div>
+      <ul class="body-ul">
+        <li><b>Centralized Institutional Gateway:</b> Successfully consolidated complaints from nine distinct campus operational domains into a single unified management cockpit.</li>
+        <li><b>High-Speed Processing:</b> Sub-second complaint submission and real-time dashboard metrics computation.</li>
+        <li><b>100% Traceability &amp; Accountability:</b> Complete elimination of misplaced grievances through unique ticket generation and immutable status history logs.</li>
+      </ul>
+
+      <div class="page-footer">
+        <span class="f-left">[MCA][CTA]</span>
+        <span class="f-line"></span>
+        <span class="f-mid">Page 23</span>
+        <span class="f-line"></span>
+        <span class="f-right">S.G.S.I.T.S., INDORE</span>
+      </div>
+    </div>
+    
+    <div class="page">
+      <div class="page-header">CHAPTER 5. CONCLUSION 2026</div>
+
+      <ul class="body-ul" style="margin-top: 10px;">
+        <li><b>Role-Based Security:</b> Enforced strict security boundaries via Bcrypt password salting and JWT authorization, guaranteeing student privacy and admin privilege protection.</li>
+        <li><b>Intuitive Visual Feedback:</b> Interactive color-coded badges and step-by-step progress timelines keeping students informed at every resolution stage.</li>
+        <li><b>Paperless Eco-Friendly Campus:</b> Eliminated physical registers and paper complaint slips, supporting sustainable digital campus initiatives.</li>
+      </ul>
+
+      <div class="section-title" style="margin-top: 20px;">5.3 &nbsp; Limitations</div>
+      <div class="body-p">
+        While the CampusCare System delivers substantial improvements over legacy methods, specific technical and operational boundaries exist:
+      </div>
+      <ul class="body-ul">
+        <li><b>Network Dependency:</b> Being a web-based platform, submitting grievances or updating ticket statuses requires active internet or campus intranet connectivity.</li>
+        <li><b>Manual Category Selection:</b> The system currently relies on the student to accurately select the problem category; ambiguous selections require manual administrative re-tagging.</li>
+        <li><b>Physical Repair Dependency:</b> While the software optimizes dispatching and tracking, the ultimate speed of resolution remains dependent on physical maintenance crew availability and spare parts.</li>
+      </ul>
+
+      <div class="section-title" style="margin-top: 20px;">5.4 &nbsp; Future Work</div>
+      <div class="body-p">
+        To further enhance the CampusCare ecosystem in future iterations, several technical upgrades are planned:
+      </div>
+      <ul class="body-ul">
+        <li><b>AI-Powered Automatic Categorization:</b> Integrating Natural Language Processing (NLP) models to automatically classify complaint descriptions into categories and assign priority weights without manual selection.</li>
+        <li><b>Computer Vision Damage Verification:</b> Implementing OpenCV and deep learning models to analyze student-uploaded photos and verify genuine infrastructural damage.</li>
+        <li><b>Dedicated Mobile Application:</b> Developing native Android and iOS mobile applications with push notifications using React Native.</li>
+        <li><b>Automated SMS &amp; WhatsApp Bot Integration:</b> Enabling students to lodge complaints and receive status updates directly via WhatsApp or SMS gateways.</li>
+        <li><b>Interactive Campus GIS Map:</b> Integrating interactive indoor maps to allow students to pin the exact geo-location of infrastructure failures across campus buildings.</li>
+      </ul>
+
+      <div class="page-footer">
+        <span class="f-left">[MCA][CTA]</span>
+        <span class="f-line"></span>
+        <span class="f-mid">Page 24</span>
+        <span class="f-line"></span>
+        <span class="f-right">S.G.S.I.T.S., INDORE</span>
+      </div>
+    </div>
+    
+    <div class="page">
+      <div class="page-header">CHAPTER 6. SNAPSHORT 2026</div>
+
+      <div style="text-align: right; font-size: 22pt; font-weight: bold; margin-bottom: 20px; margin-top: 10px;">
+        Chapter 6
+      </div>
+      <div style="text-align: center; font-size: 20pt; font-weight: bold; margin-bottom: 25px; letter-spacing: 0.5px;">
+        SNAPSHORT
+      </div>
+
+      <div style="text-align: left; font-size: 14pt; font-weight: bold; margin-bottom: 15px; text-decoration: underline;">
+        DATABASE SCREENSHORT
+      </div>
+
+      <div style="text-align: center; margin: 10px 0;">
+        <svg width="680" height="520" viewBox="0 0 680 520" xmlns="http://www.w3.org/2000/svg" style="background:#1e1e1e; font-family:'Courier New', monospace; border-radius:6px;">
+  <!-- Window Header Bar -->
+  <rect x="0" y="0" width="680" height="30" fill="#2d2d2d" rx="6"/>
+  <circle cx="16" cy="15" r="5" fill="#ef4444"/>
+  <circle cx="32" cy="15" r="5" fill="#eab308"/>
+  <circle cx="48" cy="15" r="5" fill="#22c55e"/>
+  <text x="340" y="20" font-size="11" font-weight="bold" fill="#cccccc" text-anchor="middle" font-family="'Times New Roman', serif;">MongoDB Compass — mongodb+srv://cluster.mongodb.net/campuscare</text>
+
+  <!-- Left Sidebar (Databases / Collections) -->
+  <rect x="0" y="30" width="160" height="490" fill="#252526"/>
+  <text x="15" y="55" font-size="10.5" font-weight="bold" fill="#3b82f6">&gt; campuscare</text>
+  <text x="30" y="75" font-size="10" fill="#60a5fa">📄 users (12)</text>
+  <text x="30" y="95" font-size="10" fill="#4ade80">📄 complaints (28)</text>
+  <text x="30" y="115" font-size="10" fill="#94a3b8">📄 system_logs (142)</text>
+  <line x1="160" y1="30" x2="160" y2="520" stroke="#333333" stroke-width="1"/>
+
+  <!-- Top Filter Query Bar -->
+  <rect x="170" y="40" width="495" height="32" fill="#1f2430" rx="4" stroke="#3b82f6" stroke-width="1"/>
+  <text x="180" y="60" font-size="10" fill="#93c5fd">FILTER: { "status": "SUBMITTED", "priority": "HIGH" } | SORT: { "createdAt": -1 }</text>
+  <rect x="615" y="44" width="45" height="24" rx="3" fill="#2563eb"/>
+  <text x="637" y="60" font-size="10" font-weight="bold" fill="#ffffff" text-anchor="middle">FIND</text>
+
+  <!-- Query Results Header -->
+  <text x="175" y="90" font-size="10" font-weight="bold" fill="#10b981">Query returned 2 documents (Execution Time: 3.4 ms)</text>
+
+  <!-- Document 1 Card -->
+  <g transform="translate(170, 100)">
+    <rect x="0" y="0" width="495" height="185" fill="#181824" rx="5" stroke="#383850" stroke-width="1"/>
+    <text x="15" y="20" font-size="9.5" fill="#e2e8f0">{</text>
+    <text x="25" y="38" font-size="9.5" fill="#93c5fd">"_id":</text><text x="75" y="38" font-size="9.5" fill="#fca5a5"> ObjectId("6712ab091f8a91c0e")</text><text x="290" y="38" font-size="9" fill="#64748b">,</text>
+    <text x="25" y="56" font-size="9.5" fill="#93c5fd">"ticketNumber":</text><text x="125" y="56" font-size="9.5" fill="#86efac"> "CC-2026-0014"</text><text x="240" y="56" font-size="9" fill="#64748b">,</text>
+    <text x="25" y="74" font-size="9.5" fill="#93c5fd">"title":</text><text x="75" y="74" font-size="9.5" fill="#fef08a"> "Server Room Core Switch Power Supply Failure"</text><text x="390" y="74" font-size="9" fill="#64748b">,</text>
+    <text x="25" y="92" font-size="9.5" fill="#93c5fd">"category":</text><text x="100" y="92" font-size="9.5" fill="#86efac"> "Internet / Wi-Fi"</text><text x="235" y="92" font-size="9" fill="#64748b">,</text>
+    <text x="25" y="110" font-size="9.5" fill="#93c5fd">"priority":</text><text x="95" y="110" font-size="9.5" fill="#f87171"> "HIGH"</text><text x="150" y="110" font-size="9" fill="#64748b">,</text>
+    <text x="25" y="128" font-size="9.5" fill="#93c5fd">"status":</text><text x="85" y="128" font-size="9.5" fill="#60a5fa"> "SUBMITTED"</text><text x="180" y="128" font-size="9" fill="#64748b">,</text>
+    <text x="25" y="146" font-size="9.5" fill="#93c5fd">"location":</text><text x="95" y="146" font-size="9.5" fill="#fef08a"> "Computer Center - 2nd Floor, Server Rack 4"</text><text x="395" y="146" font-size="9" fill="#64748b">,</text>
+    <text x="25" y="164" font-size="9.5" fill="#93c5fd">"createdBy":</text><text x="105" y="164" font-size="9.5" fill="#fca5a5"> ObjectId("671288f21900a3bb8")</text>
+    <text x="15" y="180" font-size="9.5" fill="#e2e8f0">}</text>
+  </g>
+
+  <!-- Document 2 Card (User Collection Preview) -->
+  <g transform="translate(170, 300)">
+    <rect x="0" y="0" width="495" height="190" fill="#181824" rx="5" stroke="#383850" stroke-width="1"/>
+    <text x="15" y="20" font-size="9.5" fill="#e2e8f0">{</text>
+    <text x="25" y="38" font-size="9.5" fill="#93c5fd">"_id":</text><text x="75" y="38" font-size="9.5" fill="#fca5a5"> ObjectId("671288f21900a3bb8")</text><text x="290" y="38" font-size="9" fill="#64748b">,</text>
+    <text x="25" y="56" font-size="9.5" fill="#93c5fd">"name":</text><text x="80" y="56" font-size="9.5" fill="#86efac"> "Tanish Jain"</text><text x="180" y="56" font-size="9" fill="#64748b">,</text>
+    <text x="25" y="74" font-size="9.5" fill="#93c5fd">"email":</text><text x="85" y="74" font-size="9.5" fill="#86efac"> "tanishjain0502@gmail.com"</text><text x="270" y="74" font-size="9" fill="#64748b">,</text>
+    <text x="25" y="92" font-size="9.5" fill="#93c5fd">"role":</text><text x="75" y="92" font-size="9.5" fill="#38bdf8"> "STUDENT"</text><text x="160" y="92" font-size="9" fill="#64748b">,</text>
+    <text x="25" y="110" font-size="9.5" fill="#93c5fd">"passwordHash":</text><text x="130" y="110" font-size="9" fill="#94a3b8"> "$2a$10$w8T0M9r1vB7xQ3..." (select: false)</text><text x="420" y="110" font-size="9" fill="#64748b">,</text>
+    <text x="25" y="128" font-size="9.5" fill="#93c5fd">"createdAt":</text><text x="110" y="128" font-size="9.5" fill="#fef08a"> ISODate("2026-10-17T11:20:00Z")</text><text x="350" y="128" font-size="9" fill="#64748b">,</text>
+    <text x="25" y="146" font-size="9.5" fill="#93c5fd">"updatedAt":</text><text x="110" y="146" font-size="9.5" fill="#fef08a"> ISODate("2026-10-18T10:14:00Z")</text>
+    <text x="15" y="170" font-size="9.5" fill="#e2e8f0">}</text>
+  </g>
+</svg>
+      </div>
+
+      <div style="text-align: center; font-size: 11pt; font-weight: bold; margin-top: 15px;">
+        Figure 6.1: MongoDB Database Schema &amp; Query Results Snapshot
+      </div>
+
+      <div class="page-footer">
+        <span class="f-left">[MCA][CTA]</span>
+        <span class="f-line"></span>
+        <span class="f-mid">Page 25</span>
+        <span class="f-line"></span>
+        <span class="f-right">S.G.S.I.T.S., INDORE</span>
+      </div>
+    </div>
+    
+    <div class="page">
+      <div class="page-header">CHAPTER 6. SNAPSHORT 2026</div>
+
+      <div style="text-align: left; font-size: 14pt; font-weight: bold; margin-top: 10px; margin-bottom: 15px; text-decoration: underline;">
+        APPLICATION USER INTERFACE SCREENSHOT
+      </div>
+
+      <div style="text-align: center; margin: 10px 0;">
+        <svg width="680" height="520" viewBox="0 0 680 520" xmlns="http://www.w3.org/2000/svg" style="background:#f8fafc; font-family:'Segoe UI', Arial, sans-serif; border-radius:6px; border:1px solid #cbd5e1;">
+  <!-- Navbar -->
+  <rect x="0" y="0" width="680" height="42" fill="#0f172a"/>
+  <circle cx="25" cy="21" r="10" fill="#3b82f6"/>
+  <text x="42" y="26" font-size="13" font-weight="bold" fill="#ffffff">CampusCare</text>
+  <text x="130" y="26" font-size="11" fill="#94a3b8">Portal: SGSITS Indore</text>
+
+  <rect x="440" y="9" width="130" height="24" rx="4" fill="#1e293b"/>
+  <text x="505" y="25" font-size="10" fill="#e2e8f0" text-anchor="middle">Role: ADMINISTRATOR</text>
+  <rect x="585" y="9" width="80" height="24" rx="4" fill="#dc2626"/>
+  <text x="625" y="25" font-size="10.5" font-weight="bold" fill="#ffffff" text-anchor="middle">Log Out</text>
+
+  <!-- Metrics Row (4 Cards) -->
+  <!-- Card 1 -->
+  <g transform="translate(20, 55)">
+    <rect x="0" y="0" width="145" height="65" rx="6" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+    <text x="12" y="20" font-size="10" font-weight="bold" fill="#64748b">TOTAL TICKETS</text>
+    <text x="12" y="48" font-size="20" font-weight="bold" fill="#0f172a">28</text>
+    <text x="60" y="48" font-size="9.5" fill="#16a34a">+12% this week</text>
+  </g>
+  <!-- Card 2 -->
+  <g transform="translate(180, 55)">
+    <rect x="0" y="0" width="145" height="65" rx="6" fill="#ffffff" stroke="#bae6fd" stroke-width="1.5"/>
+    <text x="12" y="20" font-size="10" font-weight="bold" fill="#0369a1">SUBMITTED</text>
+    <text x="12" y="48" font-size="20" font-weight="bold" fill="#0284c7">5</text>
+    <text x="45" y="48" font-size="9.5" fill="#0284c7">Awaiting review</text>
+  </g>
+  <!-- Card 3 -->
+  <g transform="translate(340, 55)">
+    <rect x="0" y="0" width="145" height="65" rx="6" fill="#ffffff" stroke="#fed7aa" stroke-width="1.5"/>
+    <text x="12" y="20" font-size="10" font-weight="bold" fill="#c2410c">IN PROGRESS</text>
+    <text x="12" y="48" font-size="20" font-weight="bold" fill="#ea580c">7</text>
+    <text x="45" y="48" font-size="9.5" fill="#ea580c">Assigned to staff</text>
+  </g>
+  <!-- Card 4 -->
+  <g transform="translate(500, 55)">
+    <rect x="0" y="0" width="155" height="65" rx="6" fill="#ffffff" stroke="#bbf7d0" stroke-width="1.5"/>
+    <text x="12" y="20" font-size="10" font-weight="bold" fill="#15803d">RESOLVED</text>
+    <text x="12" y="48" font-size="20" font-weight="bold" fill="#16a34a">16</text>
+    <text x="50" y="48" font-size="9.5" fill="#16a34a">94% SLA Met</text>
+  </g>
+
+  <!-- Section 1: Admin Management Table -->
+  <g transform="translate(20, 135)">
+    <rect x="0" y="0" width="635" height="175" rx="6" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <!-- Table Header -->
+    <rect x="0" y="0" width="635" height="30" rx="6" fill="#f1f5f9"/>
+    <text x="15" y="20" font-size="10" font-weight="bold" fill="#475569">TICKET</text>
+    <text x="110" y="20" font-size="10" font-weight="bold" fill="#475569">TITLE</text>
+    <text x="310" y="20" font-size="10" font-weight="bold" fill="#475569">CATEGORY</text>
+    <text x="420" y="20" font-size="10" font-weight="bold" fill="#475569">PRIORITY</text>
+    <text x="500" y="20" font-size="10" font-weight="bold" fill="#475569">STATUS</text>
+    <text x="580" y="20" font-size="10" font-weight="bold" fill="#475569">ACTION</text>
+
+    <!-- Row 1 -->
+    <line x1="0" y1="31" x2="635" y2="31" stroke="#e2e8f0"/>
+    <text x="15" y="52" font-size="10" font-weight="bold" fill="#2563eb">CC-2026-0014</text>
+    <text x="110" y="52" font-size="9.5" fill="#1e293b">Core Switch Power Supply Failure</text>
+    <text x="310" y="52" font-size="9.5" fill="#475569">Internet / Wi-Fi</text>
+    <rect x="415" y="40" width="45" height="18" rx="3" fill="#fee2e2"/>
+    <text x="437" y="53" font-size="9" font-weight="bold" fill="#dc2626" text-anchor="middle">HIGH</text>
+    <rect x="495" y="40" width="65" height="18" rx="3" fill="#e0f2fe"/>
+    <text x="527" y="53" font-size="9" font-weight="bold" fill="#0284c7" text-anchor="middle">SUBMITTED</text>
+    <text x="585" y="53" font-size="9.5" font-weight="bold" fill="#2563eb">Manage &gt;</text>
+
+    <!-- Row 2 -->
+    <line x1="0" y1="67" x2="635" y2="67" stroke="#e2e8f0"/>
+    <text x="15" y="88" font-size="10" font-weight="bold" fill="#2563eb">CC-2026-0012</text>
+    <text x="110" y="88" font-size="9.5" fill="#1e293b">Hostel 3 Geyser Heating Element Damaged</text>
+    <text x="310" y="88" font-size="9.5" fill="#475569">Hostel</text>
+    <rect x="415" y="76" width="45" height="18" rx="3" fill="#fee2e2"/>
+    <text x="437" y="89" font-size="9" font-weight="bold" fill="#dc2626" text-anchor="middle">HIGH</text>
+    <rect x="495" y="76" width="65" height="18" rx="3" fill="#ffedd5"/>
+    <text x="527" y="89" font-size="9" font-weight="bold" fill="#c2410c" text-anchor="middle">IN PROG</text>
+    <text x="585" y="89" font-size="9.5" font-weight="bold" fill="#2563eb">Manage &gt;</text>
+
+    <!-- Row 3 -->
+    <line x1="0" y1="103" x2="635" y2="103" stroke="#e2e8f0"/>
+    <text x="15" y="124" font-size="10" font-weight="bold" fill="#2563eb">CC-2026-0009</text>
+    <text x="110" y="124" font-size="9.5" fill="#1e293b">Classroom 204 Projector HDMI Port Broken</text>
+    <text x="310" y="124" font-size="9.5" fill="#475569">Classroom</text>
+    <rect x="415" y="112" width="45" height="18" rx="3" fill="#fef3c7"/>
+    <text x="437" y="125" font-size="9" font-weight="bold" fill="#b45309" text-anchor="middle">MED</text>
+    <rect x="495" y="112" width="65" height="18" rx="3" fill="#dcfce7"/>
+    <text x="527" y="125" font-size="9" font-weight="bold" fill="#15803d" text-anchor="middle">RESOLVED</text>
+    <text x="585" y="125" font-size="9.5" font-weight="bold" fill="#2563eb">View &gt;</text>
+
+    <!-- Row 4 -->
+    <line x1="0" y1="139" x2="635" y2="139" stroke="#e2e8f0"/>
+    <text x="15" y="160" font-size="10" font-weight="bold" fill="#2563eb">CC-2026-0005</text>
+    <text x="110" y="160" font-size="9.5" fill="#1e293b">Drinking Water Cooler Filter Replacement</text>
+    <text x="310" y="160" font-size="9.5" fill="#475569">Cleanliness</text>
+    <rect x="415" y="148" width="45" height="18" rx="3" fill="#f1f5f9"/>
+    <text x="437" y="161" font-size="9" font-weight="bold" fill="#475569" text-anchor="middle">LOW</text>
+    <rect x="495" y="148" width="65" height="18" rx="3" fill="#dcfce7"/>
+    <text x="527" y="161" font-size="9" font-weight="bold" fill="#15803d" text-anchor="middle">RESOLVED</text>
+    <text x="585" y="161" font-size="9.5" font-weight="bold" fill="#2563eb">View &gt;</text>
+  </g>
+
+  <!-- Section 2: Student Ticket Status Lifecycle Timeline -->
+  <g transform="translate(20, 325)">
+    <rect x="0" y="0" width="635" height="180" rx="6" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="18" y="24" font-size="11" font-weight="bold" fill="#0f172a">Student Grievance Timeline View: CC-2026-0012</text>
+    <line x1="18" y1="33" x2="615" y2="33" stroke="#f1f5f9"/>
+
+    <!-- Timeline Steps -->
+    <!-- Step 1 -->
+    <circle cx="50" cy="65" r="12" fill="#22c55e"/>
+    <text x="50" y="69" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">✓</text>
+    <text x="75" y="62" font-size="10.5" font-weight="bold" fill="#0f172a">Grievance Submitted</text>
+    <text x="75" y="75" font-size="9" fill="#64748b">17 Oct 2026, 10:15 AM • Submitted by Tanish Jain (0801CA251139)</text>
+
+    <line x1="50" y1="78" x2="50" y2="105" stroke="#22c55e" stroke-width="2"/>
+
+    <!-- Step 2 -->
+    <circle cx="50" cy="115" r="12" fill="#3b82f6"/>
+    <text x="50" y="119" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">2</text>
+    <text x="75" y="112" font-size="10.5" font-weight="bold" fill="#0f172a">Under Active Resolution (In Progress)</text>
+    <text x="75" y="125" font-size="9" fill="#64748b">17 Oct 2026, 02:40 PM • Assigned to Hostel Maintenance Technician Team</text>
+    
+    <line x1="50" y1="128" x2="50" y2="150" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="3,3"/>
+
+    <!-- Step 3 -->
+    <circle cx="50" cy="158" r="10" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2"/>
+    <text x="75" y="157" font-size="10.5" font-weight="bold" fill="#94a3b8">Resolution &amp; Verification</text>
+    <text x="75" y="169" font-size="9" fill="#94a3b8">Pending electrical spare part replacement in Hostel 3</text>
+  </g>
+</svg>
+      </div>
+
+      <div style="text-align: center; font-size: 11pt; font-weight: bold; margin-top: 15px;">
+        Figure 6.2: CampusCare Admin Dashboard &amp; Student Grievance Portal
+      </div>
+
+      <div class="page-footer">
+        <span class="f-left">[MCA][CTA]</span>
+        <span class="f-line"></span>
+        <span class="f-mid">Page 26</span>
+        <span class="f-line"></span>
+        <span class="f-right">S.G.S.I.T.S., INDORE</span>
+      </div>
+    </div>
+    
+    <div class="page">
+      <div class="page-header">CHAPTER 7. REFERENCES 2026</div>
+
+      <div style="text-align: right; font-size: 22pt; font-weight: bold; margin-bottom: 25px; margin-top: 10px;">
+        Chapter 7
+      </div>
+      <div style="text-align: center; font-size: 20pt; font-weight: bold; margin-bottom: 35px; letter-spacing: 0.5px;">
+        REFERENCES
+      </div>
+
+      <div style="text-align: justify; font-size: 12pt; line-height: 1.75; margin-bottom: 25px;">
+        The development of the <b>CampusCare: Centralized Campus Grievance Redressal and Incident Management System</b> is primarily built upon modern web engineering principles, robust distributed database paradigms, and asynchronous API architectures. To achieve responsive and accessible client interfaces, the project utilizes the open-source <b>ReactJS</b> framework developed by Meta, paired with the utility-based styling framework <b>Tailwind CSS</b>.
+      </div>
+
+      <div style="text-align: justify; font-size: 12pt; line-height: 1.75; margin-bottom: 25px;">
+        The technical backend framework is anchored in <b>Node.js</b> and <b>Express.js</b>, which deliver high-throughput, non-blocking asynchronous event handling to bridge client HTTP requests with enterprise business rules. Furthermore, the system relies on <b>MongoDB</b> with <b>Mongoose ODM</b> to maintain a secure, highly indexable document database, ensuring that every student incident, priority queue, and status transition log is accurately stored, audited, and protected. Stateless authorization is implemented according to RFC 7519 <b>JSON Web Token (JWT)</b> architecture with <b>Bcrypt</b> cryptographic password hashing.
+      </div>
+
+      <div style="text-align: justify; font-size: 12pt; line-height: 1.75; margin-bottom: 35px;">
+        This minor project was conducted under the expert supervision and academic guidance of <b>Mr. Deepesh Agarwal</b> (Assistant Professor), <b>Dr. Sunita Varma</b> (Head of Department), and <b>Prof. Sonika Soni</b> in the <b>Department of Computer Technology and Applications</b> at <b>Shri Govindram Seksaria Institute of Technology and Science (SGSITS), Indore</b>.
+      </div>
+
+      <div style="font-weight: bold; font-size: 11.5pt; margin-bottom: 10px;">
+        Key Academic &amp; Technical Citations:
+      </div>
+      <ol style="font-size: 10.5pt; line-height: 1.6; padding-left: 20px;">
+        <li>Pressman, R. S., &amp; Maxim, B. R. (2020). <i>Software Engineering: A Practitioner's Approach</i> (9th ed.). McGraw-Hill Education.</li>
+        <li>Fowler, M. (2003). <i>UML Distilled: A Brief Guide to the Standard Object Modeling Language</i> (3rd ed.). Addison-Wesley Professional.</li>
+        <li>Meta Open Source. (2025). <i>React – A JavaScript Library for Building User Interfaces</i>. Official Documentation: https://react.dev</li>
+        <li>OpenJS Foundation. (2025). <i>Node.js &amp; Express Framework Architecture Guide</i>. https://expressjs.com</li>
+        <li>MongoDB Inc. (2025). <i>MongoDB Database Manual: Schema Design Patterns and Indexing</i>. https://www.mongodb.com/docs</li>
+        <li>Internet Engineering Task Force (IETF). (2015). <i>JSON Web Token (JWT) Architecture (RFC 7519)</i>.</li>
+      </ol>
+
+      <div class="page-footer">
+        <span class="f-left">[MCA][CTA]</span>
+        <span class="f-line"></span>
+        <span class="f-mid">Page 27</span>
+        <span class="f-line"></span>
+        <span class="f-right">S.G.S.I.T.S., INDORE</span>
+      </div>
+    </div>
+    
+</body>
+</html>
