@@ -41,7 +41,7 @@ app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 // ---------------------------------------------------------------------------
 
 // Health check — no authentication required
-app.get('/api/health', (_req, res) => {
+app.get(['/api/health', '/health'], (_req, res) => {
   res.status(200).json({
     success: true,
     message: 'CampusCare API is running.',
@@ -49,11 +49,11 @@ app.get('/api/health', (_req, res) => {
   });
 });
 
-// Authentication routes
-app.use('/api/auth', authRoutes);
+// Authentication routes (supports both /api/auth and /auth)
+app.use(['/api/auth', '/auth'], authRoutes);
 
-// Complaint routes
-app.use('/api/complaints', complaintRoutes);
+// Complaint routes (supports both /api/complaints and /complaints)
+app.use(['/api/complaints', '/complaints'], complaintRoutes);
 
 // ---------------------------------------------------------------------------
 // 404 handler — catches requests to undefined routes

@@ -9,8 +9,12 @@ import axios from 'axios';
  *   means it is vulnerable to XSS attacks. In a production system, prefer
  *   storing the token in an HttpOnly cookie so it is inaccessible to scripts.
  */
+const rawBaseURL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
+const trimmedURL = rawBaseURL.trim().replace(/\/+$/, '');
+const baseURL = trimmedURL.endsWith('/api') ? trimmedURL : `${trimmedURL}/api`;
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5001/api',
+  baseURL,
   headers: {
     'Content-Type': 'application/json',
   },
